@@ -2,6 +2,8 @@
 
 **AFusion** is a user-friendly graphical interface designed to simplify the process of generating input JSON files and running AlphaFold 3 predictions. It streamlines the setup and execution of AlphaFold 3, making it accessible to users who prefer a GUI over command-line interactions.
 
+**[Demo site](https://af3gui.streamlit.app/) (generate input JSON files ONLY)**
+
 ## Table of Contents
 
 - [Features](#features)
