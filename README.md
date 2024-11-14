@@ -93,6 +93,8 @@ Before using AFusion, ensure that you have the following:
 
 ### Using the GUI
 
+**Find more about input in [here](https://github.com/google-deepmind/alphafold3/blob/main/docs/input.md)**
+
 #### 1. Welcome Page
 
 - **Logo and Introduction**: You'll see the AFusion logo and a brief description.
@@ -128,7 +130,6 @@ Before using AFusion, ensure that you have the following:
 - **Review JSON Content**: The application generates the JSON input file based on your entries. You can review it here.
 
 #### 7. AlphaFold 3 Execution Settings
-Find more in [here](https://github.com/google-deepmind/alphafold3/blob/main/docs/input.md)
 
 - **Paths Configuration**:
   - **AF Input Path**: Specify the path to the AlphaFold input directory (e.g., `/home/user/af_input`).
