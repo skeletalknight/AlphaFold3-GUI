@@ -82,7 +82,7 @@ def main():
         for section_name, section_id in sections.items():
             st.markdown(f"<a href='#{section_id}' style='text-decoration: none;'>{section_name}</a>", unsafe_allow_html=True)
         st.markdown("---")
-        st.markdown("<small>Created by Mars 2024.</small>", unsafe_allow_html=True)
+        st.markdown("<small>Created by Hanziwww 2024.</small>", unsafe_allow_html=True)
 
     # Main Content
     st.markdown('<div id="home"></div>', unsafe_allow_html=True)
@@ -243,7 +243,7 @@ def main():
 
     st.markdown("---")
     # Add footer
-    st.markdown("<p style='text-align: center; font-size: 12px; color: #95a5a6;'>© 2024 Mars. All rights reserved.</p>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align: center; font-size: 12px; color: #95a5a6;'>© 2024 Hanziwww. All rights reserved.</p>", unsafe_allow_html=True)
 
 def handle_protein_entity(i, entity_ids):
     sequence = st.text_area(f"Protein Sequence (Entity {i+1})", key=f"sequence_{i}", help="Enter the protein sequence.")
