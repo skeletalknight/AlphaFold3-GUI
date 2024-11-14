@@ -151,7 +151,7 @@ Find more in [here](https://github.com/google-deepmind/alphafold3/blob/main/docs
 
 ## Screenshots
 
-![Screenshots][screenshots.jpg]
+<img width="931" alt="screenshot" src="https://github.com/user-attachments/assets/e3739384-6fe8-4d0b-aa72-a8e56e5ee9f7">
 
 ## License
 
