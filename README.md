@@ -21,8 +21,6 @@
 - **Dynamic JSON Generation**: Automatically generates the required JSON input file for AlphaFold 3 based on user inputs.
 - **Integrated Execution**: Run AlphaFold 3 directly from the GUI with customizable Docker execution settings.
 - **Visual Feedback**: Provides command output within the interface for monitoring and debugging.
-- **Collapsible Sections**: Organize inputs and outputs with expandable sections for a streamlined experience.
-- **Navigation Sidebar**: Quickly navigate between different sections of the app using the sidebar links.
 
 ## Prerequisites
 
