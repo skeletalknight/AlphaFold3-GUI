@@ -60,20 +60,6 @@ Before using AFusion, ensure that you have the following:
    cd afusion
    ```
 
-3. **Install Python Dependencies**
-
-   Install the required Python packages if you haven't already.
-
-   ```bash
-   pip install Streamlit
-   ```
-
-   *(Note: Create a `requirements.txt` file in the project directory with the necessary packages.)*
-
-4. **Place the Logo Image**
-
-   Ensure that the `logo_afusion.png` image is placed in the project directory. This image is used as the logo in the application.
-
 ## Usage
 
 ### Launching AFusion
