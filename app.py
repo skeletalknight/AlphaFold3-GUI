@@ -82,7 +82,7 @@ def main():
         for section_name, section_id in sections.items():
             st.markdown(f"<a href='#{section_id}' style='text-decoration: none;'>{section_name}</a>", unsafe_allow_html=True)
         st.markdown("---")
-        st.markdown("<small>Created by Hanziwww 2024.</small>", unsafe_allow_html=True)
+        st.markdown("<small>Created by hanzi 2024.</small>", unsafe_allow_html=True)
 
     # Main Content
     st.markdown('<div id="home"></div>', unsafe_allow_html=True)
@@ -243,7 +243,7 @@ def main():
 
     st.markdown("---")
     # Add footer
-    st.markdown("<p style='text-align: center; font-size: 12px; color: #95a5a6;'>© 2024 Hanziwww. All rights reserved.</p>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align: center; font-size: 12px; color: #95a5a6;'>© 2024 hanzi. All rights reserved.</p>", unsafe_allow_html=True)
 
 def handle_protein_entity(i, entity_ids):
     sequence = st.text_area(f"Protein Sequence (Entity {i+1})", key=f"sequence_{i}", help="Enter the protein sequence.")
@@ -371,7 +371,7 @@ def handle_dna_entity(i, entity_ids):
 
 def handle_ligand_entity(i, entity_ids):
     ligand_ids = entity_ids
-    ccd_codes = st.text_input(f"CCD Codes (comma-separated)", key=f"ccd_codes_{i}", help="Provide CCD Codes, separated by commas.")
+    ccd_codes = st.text_input(f"CCD Codes (comma-separated)", key=f"ccd_codes_{i}", help="Provide CCD Codes, separated by commas. Ion would be specify as an ligand with ccdCodes: e.g. MG")
     smiles = st.text_input(f"SMILES String", key=f"smiles_{i}", help="Provide SMILES string of the ligand.")
     if ccd_codes and smiles:
         st.error("Please provide only one of CCD Codes or SMILES String.")
