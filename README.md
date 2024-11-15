@@ -101,7 +101,7 @@ Before using AFusion, ensure that you have the following:
 
 ### Using the GUI
 
-**Find more about input in [here](https://github.com/google-deepmind/alphafold3/blob/main/docs/input.md)**
+**Find more about input in [here](https://github.com/google-deepmind/alphafold3/blob/main/docs/input.md)**.
 
 #### 1. Welcome Page
 
