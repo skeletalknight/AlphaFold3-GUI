@@ -168,6 +168,17 @@ def main():
 
     st.markdown('<div id="json_content"></div>', unsafe_allow_html=True)
     st.header("📄 Generated JSON Content")
+
+    for sequence_entry in alphafold_input['sequences']:
+        entity_type = list(sequence_entry.keys())[0]
+        entity_data = sequence_entry[entity_type]
+        # unpairedMsa
+        if 'unpairedMsa' in entity_data and entity_data['unpairedMsa'] is not None:
+            entity_data['unpairedMsa'] = entity_data['unpairedMsa'].replace('\n', '\\n')
+        # pairedMsa
+        if 'pairedMsa' in entity_data and entity_data['pairedMsa'] is not None:
+            entity_data['pairedMsa'] = entity_data['pairedMsa'].replace('\n', '\\n')
+    
     json_output = json.dumps(alphafold_input, indent=2)
     st.code(json_output, language="json")
 
