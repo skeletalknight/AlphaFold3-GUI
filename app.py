@@ -87,7 +87,7 @@ def main():
     # Main Content
     st.markdown('<div id="home"></div>', unsafe_allow_html=True)
     st.markdown("### Welcome to AFusion!")
-    st.write("Use this GUI to generate input JSON files and run AlphaFold 3 predictions with ease.")
+    st.markdown("Use this GUI to generate input JSON files and run AlphaFold 3 predictions with ease. Please [install AlphaFold 3](https://github.com/google-deepmind/alphafold3/blob/main/docs/installation.md) before using.")
 
     st.markdown('<div id="job_settings"></div>', unsafe_allow_html=True)
     st.header("📝 Job Settings")
@@ -182,6 +182,22 @@ def main():
         # Additional options
         run_data_pipeline = st.checkbox("Run Data Pipeline (CPU only, time-consuming)", value=True)
         run_inference = st.checkbox("Run Inference (requires GPU)", value=True)
+        
+         # **New Feature: Bucket Sizes Configuration**
+        use_custom_buckets = st.checkbox("Specify Custom Compilation Buckets", value=False)
+        if use_custom_buckets:
+            buckets_input = st.text_input(
+                "Bucket Sizes (comma-separated)",
+                value="256,512,768,1024,1280,1536,2048,2560,3072,3584,4096,4608,5120",
+                help="Specify bucket sizes separated by commas. Example: 256,512,768,..."
+            )
+            # Parse buckets
+            bucket_sizes = [int(size.strip()) for size in buckets_input.split(",") if size.strip().isdigit()]
+            if not bucket_sizes:
+                st.error("Please provide at least one valid bucket size.")
+                st.stop()
+        else:
+            bucket_sizes = []  # Empty list indicates default buckets
 
     st.markdown('<div id="run_alphafold"></div>', unsafe_allow_html=True)
     st.header("🚀 Run AlphaFold 3")
@@ -223,6 +239,7 @@ def main():
             f"--output_dir=/root/af_output "
             f"{'--run_data_pipeline' if run_data_pipeline else ''} "
             f"{'--run_inference' if run_inference else ''}"
+            f"{'--buckets ' + ','.join(map(str, bucket_sizes)) if bucket_sizes else ''}"
         )
 
         st.markdown("#### Docker Command:")
