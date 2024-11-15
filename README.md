@@ -16,6 +16,9 @@
     <img src="https://img.shields.io/badge/Python-3.10-blue.svg">
     <img src="https://img.shields.io/badge/Framework-Streamlit-green.svg">
     <img src="https://img.shields.io/badge/Model-AlphaFold3-orange.svg">
+    <a href="https://pypi.org/project/afusion/">
+        <img src="https://img.shields.io/badge/PyPI-afusion-purple.svg">
+    </a>
 </p>
 
 <p align="center">
