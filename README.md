@@ -101,7 +101,7 @@ If you encounter any issues during installation or usage, please refer to the re
    From the project directory, run:
 
    ```bash
-   streamlit run app.py --server.fileWatcherType=none
+   afusion
    ```
 
 2. **Access the Application**
