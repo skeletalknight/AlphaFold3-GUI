@@ -1,6 +1,14 @@
-# AFusion: AlphaFold 3 GUI
+<h1 align="center">🔬 AFusion: AlphaFold 3 GUI</h1>
 
-**AFusion** is a user-friendly graphical interface designed to simplify the process of generating input JSON files and running AlphaFold 3 predictions. It streamlines the setup and execution of AlphaFold 3, making it accessible to users who prefer a GUI over command-line interactions.
+<p align="center">
+    <img src="https://img.shields.io/badge/Python-3.10-blue.svg">
+    <img src="https://img.shields.io/badge/Framework-Streamlit-green.svg">
+    <img src="https://img.shields.io/badge/Model-AlphaFold3-orange.svg">
+</p>
+
+<p align="center">
+    <em>AFusion</em> is a user-friendly graphical interface designed to simplify the process of generating input JSON files and running AlphaFold 3 predictions. It streamlines the setup and execution of AlphaFold 3, making it accessible to users who prefer a GUI over command-line interactions.
+</p>
 
 **[Demo site](https://af3gui.streamlit.app/) (generate input JSON files ONLY)**
 
