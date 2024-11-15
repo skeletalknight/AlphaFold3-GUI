@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: afusion
-Version: 0.2.1
+Version: 0.2.2
 Summary: A Streamlit app for running AlphaFold 3 predictions
 Home-page: https://github.com/Hanziwww/AlphaFold3-GUI
 Author: Han Wang
@@ -43,7 +43,7 @@ Requires-Dist: streamlit
 
 - [Features](#features)
 - [Prerequisites](#prerequisites)
-- [Installation](#installation)
+- [Installation and Running](#installation-and-running)
 - [Usage](#usage)
   - [Launching AFusion](#launching-afusion)
   - [Using the GUI](#using-the-gui)
@@ -63,31 +63,49 @@ Requires-Dist: streamlit
 
 Before using AFusion, ensure that you have the following:
 
-1. **Docker Installed**: Docker is required to run AlphaFold 3. Install Docker from the [official website](https://www.docker.com/get-started).
+1. **Docker Installed**: Docker is required to run AlphaFold 3. Install Docker from the [official website](https://www.docker.com/get-started/).
 
 2. **AlphaFold 3 Installed**: AFusion requires AlphaFold 3 to be installed and set up on your system. Follow the installation instructions provided in the [AlphaFold 3 GitHub Repository](https://github.com/google-deepmind/alphafold3) to deploy AlphaFold 3.
 
 3. **Python 3.10 or Higher**: AFusion is built with Python and requires Python 3.10 or higher.
 
-4. **Streamlit Library**: Install Streamlit to run the GUI application.
+4. **Install AFusion Package**: Use the `pip` command to install AFusion.
 
    ```bash
-   pip install streamlit
+   pip install afusion
    ```
-   
-## Installation
 
-1. **Clone the Repository**: Clone or download the AFusion source code from this repository.
+## Installation and Running
+
+1. **Install AFusion**
+
+   Run the following command in your terminal to install AFusion:
 
    ```bash
-   git clone https://github.com/yourusername/afusion.git
+   pip install afusion
    ```
 
-2. **Navigate to the Project Directory**
+2. **Run AFusion**
+
+   After installation, you can start AFusion by running:
 
    ```bash
-   cd afusion
+   afusion
    ```
+
+   This will launch the AFusion graphical user interface (GUI) in your default web browser.
+
+
+**Please Note:**
+
+- **AlphaFold 3 Installation**: Ensure you have correctly installed AlphaFold 3, including model parameters and required databases, following the [AlphaFold 3 Installation Guide](https://github.com/google-deepmind/alphafold3/blob/main/docs/installation.md).
+
+- **Docker Configuration**: After installing Docker, make sure it is running properly and that your user has permission to execute Docker commands.
+
+- **Streamlit is Included in Dependencies**: AFusion's installation will automatically install all required dependencies, including Streamlit. There's no need to install it separately.
+
+If you encounter any issues during installation or usage, please refer to the relevant official documentation or contact us for support.
+
 
 ## Usage
 
@@ -98,7 +116,7 @@ Before using AFusion, ensure that you have the following:
    From the project directory, run:
 
    ```bash
-   streamlit run app.py --server.fileWatcherType=none
+   afusion
    ```
 
 2. **Access the Application**

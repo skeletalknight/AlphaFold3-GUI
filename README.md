@@ -54,12 +54,6 @@ Before using AFusion, ensure that you have the following:
 
 3. **Python 3.10 or Higher**: AFusion is built with Python and requires Python 3.10 or higher.
 
-4. **Install AFusion Package**: Use the `pip` command to install AFusion.
-
-   ```bash
-   pip install afusion
-   ```
-
 ## Installation and Running
 
 1. **Install AFusion**

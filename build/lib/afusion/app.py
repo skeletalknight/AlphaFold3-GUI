@@ -1,3 +1,4 @@
+# Copyright hanzi
 import streamlit as st
 import json
 import re
@@ -480,7 +481,7 @@ def handle_bond(b):
         atom_name2 = st.text_input(f"Atom Name 2", key=f"bond_atom2_{b}")
 
     if not (entity_id1 and atom_name1 and entity_id2 and atom_name2):
-        st.error("All fields are required for defining a bond.")
+        st.error("⚠️ All fields are required for defining a bond.")
         return None
 
     return [
