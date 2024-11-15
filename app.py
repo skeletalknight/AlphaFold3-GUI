@@ -3,6 +3,8 @@ import json
 import re
 import os
 import subprocess
+import zipfile
+import io
 from PIL import Image
 
 def run_alphafold(command):
@@ -169,16 +171,6 @@ def main():
     st.markdown('<div id="json_content"></div>', unsafe_allow_html=True)
     st.header("📄 Generated JSON Content")
 
-    for sequence_entry in alphafold_input['sequences']:
-        entity_type = list(sequence_entry.keys())[0]
-        entity_data = sequence_entry[entity_type]
-        # unpairedMsa
-        if 'unpairedMsa' in entity_data and entity_data['unpairedMsa'] is not None:
-            entity_data['unpairedMsa'] = entity_data['unpairedMsa'].replace('\n', '\\n')
-        # pairedMsa
-        if 'pairedMsa' in entity_data and entity_data['pairedMsa'] is not None:
-            entity_data['pairedMsa'] = entity_data['pairedMsa'].replace('\n', '\\n')
-    
     json_output = json.dumps(alphafold_input, indent=2)
     st.code(json_output, language="json")
 
@@ -194,8 +186,8 @@ def main():
         # Additional options
         run_data_pipeline = st.checkbox("Run Data Pipeline (CPU only, time-consuming)", value=True)
         run_inference = st.checkbox("Run Inference (requires GPU)", value=True)
-        
-         # **New Feature: Bucket Sizes Configuration**
+
+        # Bucket Sizes Configuration
         use_custom_buckets = st.checkbox("Specify Custom Compilation Buckets", value=False)
         if use_custom_buckets:
             buckets_input = st.text_input(
@@ -214,31 +206,20 @@ def main():
     st.markdown('<div id="run_alphafold"></div>', unsafe_allow_html=True)
     st.header("🚀 Run AlphaFold 3")
     # Save JSON to file
-    if st.button("Save JSON File"):
-        json_save_path = os.path.join(af_input_path, "fold_input.json")
-        try:
-            os.makedirs(af_input_path, exist_ok=True)
-            with open(json_save_path, "w") as json_file:
-                json.dump(alphafold_input, json_file, indent=2)
-            st.success(f"JSON file saved to {json_save_path}")
-        except Exception as e:
-            st.error(f"Error saving JSON file: {e}")
+    json_save_path = os.path.join(af_input_path, "fold_input.json")
+    try:
+        os.makedirs(af_input_path, exist_ok=True)
+        with open(json_save_path, "w") as json_file:
+            json.dump(alphafold_input, json_file, indent=2)
+        st.success(f"JSON file saved to {json_save_path}")
+    except Exception as e:
+        st.error(f"Error saving JSON file: {e}")
 
     # Run AlphaFold 3
     if st.button("Run AlphaFold 3 Now ▶️"):
-        json_save_path = os.path.join(af_input_path, "fold_input.json")
-        try:
-            # Ensure JSON is saved before running
-            os.makedirs(af_input_path, exist_ok=True)
-            with open(json_save_path, "w") as json_file:
-                json.dump(alphafold_input, json_file, indent=2)
-        except Exception as e:
-            st.error(f"Error saving JSON file: {e}")
-            st.stop()
-
         # Build the Docker command
         docker_command = (
-            f"docker run -it "
+            f"docker run --rm "
             f"--volume {af_input_path}:/root/af_input "
             f"--volume {af_output_path}:/root/af_output "
             f"--volume {model_parameters_dir}:/root/models "
@@ -250,7 +231,7 @@ def main():
             f"--model_dir=/root/models "
             f"--output_dir=/root/af_output "
             f"{'--run_data_pipeline' if run_data_pipeline else ''} "
-            f"{'--run_inference' if run_inference else ''}"
+            f"{'--run_inference' if run_inference else ''} "
             f"{'--buckets ' + ','.join(map(str, bucket_sizes)) if bucket_sizes else ''}"
         )
 
@@ -261,12 +242,31 @@ def main():
         with st.spinner('AlphaFold 3 is running...'):
             output = run_alphafold(docker_command)
 
-        st.success("AlphaFold 3 execution completed.")
-
         # Display the output in an expander box
         st.markdown("#### Command Output:")
         with st.expander("Show Command Output 📄", expanded=False):
             st.text_area("Command Output", value=output, height=400)
+
+        # Check if the output directory exists
+        job_output_folder_name = job_name.lower().replace(' ', '_')
+        output_folder_path = os.path.join(af_output_path, job_output_folder_name)
+
+        if os.path.exists(output_folder_path):
+            st.success("AlphaFold 3 execution completed successfully.")
+            st.info(f"Results are saved in: {output_folder_path}")
+
+            # Provide download option
+            st.markdown("### Download Results 📥")
+            zip_data = compress_output_folder(output_folder_path, job_output_folder_name)
+            st.download_button(
+                label="Download ZIP",
+                data=zip_data,
+                file_name=f"{job_output_folder_name}.zip",
+                mime="application/zip"
+            )
+        else:
+            st.error("AlphaFold 3 execution did not complete successfully. Please check the logs.")
+
     else:
         st.info("Click the 'Run AlphaFold 3 Now ▶️' button to execute the command.")
 
@@ -276,6 +276,7 @@ def main():
 
 def handle_protein_entity(i, entity_ids):
     sequence = st.text_area(f"Protein Sequence (Entity {i+1})", key=f"sequence_{i}", help="Enter the protein sequence.")
+
     # Modifications
     modifications_list = []
     add_modifications = st.checkbox(f"Add Modifications", key=f"add_modifications_{i}")
@@ -292,12 +293,18 @@ def handle_protein_entity(i, entity_ids):
 
     # MSA Options
     msa_option = st.selectbox(f"MSA Option", ["Auto-generate 🛠️", "Don't use MSA 🚫", "Upload MSA 📄"], key=f"msa_option_{i}")
+
+    unpaired_msa = ""
+    paired_msa = ""
     if msa_option == "Upload MSA 📄":
         unpaired_msa = st.text_area(f"Unpaired MSA", key=f"unpaired_msa_{i}")
+        paired_msa = st.text_area(f"Paired MSA", key=f"paired_msa_{i}")
     elif msa_option == "Don't use MSA 🚫":
         unpaired_msa = ""
-    else:
-        unpaired_msa = None  # Auto-generate
+        paired_msa = ""
+    elif msa_option == "Auto-generate 🛠️":
+        unpaired_msa = None
+        paired_msa = None
 
     # Templates
     templates_list = []
@@ -330,11 +337,19 @@ def handle_protein_entity(i, entity_ids):
         protein_entry["modifications"] = modifications_list
     if unpaired_msa is not None:
         protein_entry["unpairedMsa"] = unpaired_msa
-        if msa_option == "Don't use MSA 🚫":
-            protein_entry["pairedMsa"] = ""  # Explicitly set to empty string
-    if templates_list:
-        protein_entry["templates"] = templates_list
-
+    if paired_msa is not None:
+        protein_entry["pairedMsa"] = paired_msa
+    if templates_list or (unpaired_msa is not None) or (paired_msa is not None):
+        if "unpairedMsa" not in protein_entry:
+            protein_entry["unpairedMsa"] = ""
+        if "pairedMsa" not in protein_entry:
+            protein_entry["pairedMsa"] = ""
+        if "templates" not in protein_entry:
+            protein_entry["templates"] = templates_list if templates_list else []
+    elif msa_option == "Don't use MSA 🚫":
+        protein_entry["unpairedMsa"] = ""
+        protein_entry["pairedMsa"] = ""
+        protein_entry["templates"] = []
     return protein_entry
 
 def handle_rna_entity(i, entity_ids):
@@ -355,12 +370,14 @@ def handle_rna_entity(i, entity_ids):
 
     # MSA Options
     msa_option = st.selectbox(f"MSA Option", ["Auto-generate 🛠️", "Don't use MSA 🚫", "Upload MSA 📄"], key=f"msa_option_{i}")
+
+    unpaired_msa = ""
     if msa_option == "Upload MSA 📄":
         unpaired_msa = st.text_area(f"Unpaired MSA", key=f"unpaired_msa_{i}")
     elif msa_option == "Don't use MSA 🚫":
         unpaired_msa = ""
-    else:
-        unpaired_msa = None  # Auto-generate
+    elif msa_option == "Auto-generate 🛠️":
+        unpaired_msa = None
 
     rna_entry = {
         "id": entity_ids if len(entity_ids) > 1 else entity_ids[0],
@@ -370,7 +387,6 @@ def handle_rna_entity(i, entity_ids):
         rna_entry["modifications"] = modifications_list
     if unpaired_msa is not None:
         rna_entry["unpairedMsa"] = unpaired_msa
-
     return rna_entry
 
 def handle_dna_entity(i, entity_ids):
@@ -400,7 +416,7 @@ def handle_dna_entity(i, entity_ids):
 
 def handle_ligand_entity(i, entity_ids):
     ligand_ids = entity_ids
-    ccd_codes = st.text_input(f"CCD Codes (comma-separated)", key=f"ccd_codes_{i}", help="Provide CCD Codes, separated by commas. Ion would be specify as an ligand with ccdCodes: e.g. MG")
+    ccd_codes = st.text_input(f"CCD Codes (comma-separated)", key=f"ccd_codes_{i}", help="Provide CCD Codes, separated by commas. Ion would be specify as a ligand with ccdCodes: e.g. MG")
     smiles = st.text_input(f"SMILES String", key=f"smiles_{i}", help="Provide SMILES string of the ligand.")
     if ccd_codes and smiles:
         st.error("Please provide only one of CCD Codes or SMILES String.")
@@ -443,6 +459,18 @@ def handle_bond(b):
         [entity_id1, residue_id1, atom_name1],
         [entity_id2, residue_id2, atom_name2]
     ]
+
+def compress_output_folder(output_folder_path, job_output_folder_name):
+    # Create a ZIP file in memory
+    zip_buffer = io.BytesIO()
+    with zipfile.ZipFile(zip_buffer, 'w', zipfile.ZIP_DEFLATED) as zipf:
+        for root, dirs, files in os.walk(output_folder_path):
+            for file in files:
+                file_path = os.path.join(root, file)
+                arcname = os.path.relpath(file_path, start=output_folder_path)
+                zipf.write(file_path, arcname)
+    zip_buffer.seek(0)
+    return zip_buffer.getvalue()
 
 if __name__ == "__main__":
     main()
