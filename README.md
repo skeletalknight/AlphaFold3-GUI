@@ -10,10 +10,6 @@
 </p>
 <p>
 </p>
-<p>
-</p>
-<p>
-</p>
 <h1 align="center">🔬 AFusion: AlphaFold 3 GUI</h1>
 
 <p align="center">
