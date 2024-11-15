@@ -150,8 +150,7 @@ Before using AFusion, ensure that you have the following:
 
 ## Screenshots
 
-![image](https://github.com/user-attachments/assets/2a0b093c-5403-4efb-9d1b-b6d002bc7952)
-
+![image](https://github.com/user-attachments/assets/ded5384e-20dd-4ae8-9e2f-2b7f5b1be622)
 
 ## License
 
