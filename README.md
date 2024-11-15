@@ -59,18 +59,10 @@ Before using AFusion, ensure that you have the following:
    ```bash
    pip install streamlit
    ```
-
-5. **Other Dependencies**: Ensure the following Python libraries are installed:
-
-   ```bash
-   pip install numpy pandas pillow
-   ```
-
-6. **AFusion Source Code**: Clone or download the AFusion source code from this repository.
-
+   
 ## Installation
 
-1. **Clone the Repository**
+1. **Clone the Repository**: Clone or download the AFusion source code from this repository.
 
    ```bash
    git clone https://github.com/yourusername/afusion.git
