@@ -111,31 +111,61 @@ def main():
         st.markdown(f"### Entity {i+1}")
         with st.expander(f"Entity {i+1} Details", expanded=True):
             entity_type = st.selectbox(f"Select Entity Type", ["Protein 🧬", "RNA 🧫", "DNA 🧬", "Ligand 💊"], key=f"entity_type_{i}")
-            entity_id = st.text_input(f"Entity ID (Entity {i+1})", key=f"entity_id_{i}", help="Provide entity ID(s), separated by commas if multiple.")
-            entity_ids = re.split(r"\s*,\s*", entity_id)  # Split by commas
 
-            if not entity_id:
-                st.error("Entity ID is required.")
-                continue  # Skip to the next entity
+            copy_number = st.number_input(f"Copy Number", min_value=1, step=1, value=1, key=f"copy_number_{i}", help="Specify the number of copies of this sequence.")
 
+            # Collect sequence data common to all copies
             if entity_type.startswith("Protein"):
-                protein_entry = handle_protein_entity(i, entity_ids)
-                if protein_entry:
-                    sequences.append({"protein": protein_entry})
+                sequence_data = collect_protein_sequence_data(i)
             elif entity_type.startswith("RNA"):
-                rna_entry = handle_rna_entity(i, entity_ids)
-                if rna_entry:
-                    sequences.append({"rna": rna_entry})
+                sequence_data = collect_rna_sequence_data(i)
             elif entity_type.startswith("DNA"):
-                dna_entry = handle_dna_entity(i, entity_ids)
-                if dna_entry:
-                    sequences.append({"dna": dna_entry})
+                sequence_data = collect_dna_sequence_data(i)
             elif entity_type.startswith("Ligand"):
-                ligand_entry = handle_ligand_entity(i, entity_ids)
-                if ligand_entry:
-                    sequences.append({"ligand": ligand_entry})
+                sequence_data = collect_ligand_sequence_data(i)
             else:
                 st.error(f"Unknown entity type: {entity_type}")
+                continue  # Skip to next entity
+
+            # Handle IDs based on copy number
+            if copy_number == 1:
+                # Allow user to input multiple IDs
+                entity_id = st.text_input(f"Entity ID(s)", key=f"entity_id_{i}", help="Provide entity ID(s), separated by commas if multiple.")
+                if not entity_id.strip():
+                    st.error("Entity ID is required.")
+                    continue
+                entity_ids = re.split(r"\s*,\s*", entity_id)
+                # Clone the sequence data and set the id
+                sequence_entry = sequence_data.copy()
+                sequence_entry['id'] = entity_ids if len(entity_ids) > 1 else entity_ids[0]
+                # Wrap the entry appropriately
+                if entity_type.startswith("Protein"):
+                    sequences.append({"protein": sequence_entry})
+                elif entity_type.startswith("RNA"):
+                    sequences.append({"rna": sequence_entry})
+                elif entity_type.startswith("DNA"):
+                    sequences.append({"dna": sequence_entry})
+                elif entity_type.startswith("Ligand"):
+                    sequences.append({"ligand": sequence_entry})
+            else:
+                # For each copy, get copy ID and create sequence entry
+                for c in range(int(copy_number)):
+                    copy_id = st.text_input(f"Copy {c+1} ID", key=f"copy_{i}_{c}_id", help="Provide ID for this copy.")
+                    if not copy_id:
+                        st.error(f"Copy {c+1} ID is required.")
+                        continue
+                    # Clone the sequence data and set the id
+                    sequence_entry = sequence_data.copy()
+                    sequence_entry['id'] = copy_id
+                    # Wrap the entry appropriately
+                    if entity_type.startswith("Protein"):
+                        sequences.append({"protein": sequence_entry})
+                    elif entity_type.startswith("RNA"):
+                        sequences.append({"rna": sequence_entry})
+                    elif entity_type.startswith("DNA"):
+                        sequences.append({"dna": sequence_entry})
+                    elif entity_type.startswith("Ligand"):
+                        sequences.append({"ligand": sequence_entry})
 
     st.markdown('<div id="bonded_atom_pairs"></div>', unsafe_allow_html=True)
     st.header("🔗 Bonded Atom Pairs (Optional)")
@@ -274,7 +304,7 @@ def main():
     # Add footer
     st.markdown("<p style='text-align: center; font-size: 12px; color: #95a5a6;'>© 2024 hanzi. All rights reserved.</p>", unsafe_allow_html=True)
 
-def handle_protein_entity(i, entity_ids):
+def collect_protein_sequence_data(i):
     sequence = st.text_area(f"Protein Sequence (Entity {i+1})", key=f"sequence_{i}", help="Enter the protein sequence.")
 
     # Modifications
@@ -330,7 +360,6 @@ def handle_protein_entity(i, entity_ids):
             })
 
     protein_entry = {
-        "id": entity_ids if len(entity_ids) > 1 else entity_ids[0],
         "sequence": sequence
     }
     if modifications_list:
@@ -344,16 +373,19 @@ def handle_protein_entity(i, entity_ids):
             protein_entry["unpairedMsa"] = ""
         if "pairedMsa" not in protein_entry:
             protein_entry["pairedMsa"] = ""
-        if "templates" not in protein_entry:
-            protein_entry["templates"] = templates_list if templates_list else []
+        if templates_list:
+            protein_entry["templates"] = templates_list
+        else:
+            protein_entry["templates"] = []
     elif msa_option == "Don't use MSA 🚫":
         protein_entry["unpairedMsa"] = ""
         protein_entry["pairedMsa"] = ""
         protein_entry["templates"] = []
     return protein_entry
 
-def handle_rna_entity(i, entity_ids):
+def collect_rna_sequence_data(i):
     sequence = st.text_area(f"RNA Sequence (Entity {i+1})", key=f"sequence_{i}", help="Enter the RNA sequence.")
+
     # Modifications
     modifications_list = []
     add_modifications = st.checkbox(f"Add Modifications", key=f"add_modifications_{i}")
@@ -380,7 +412,6 @@ def handle_rna_entity(i, entity_ids):
         unpaired_msa = None
 
     rna_entry = {
-        "id": entity_ids if len(entity_ids) > 1 else entity_ids[0],
         "sequence": sequence
     }
     if modifications_list:
@@ -389,8 +420,9 @@ def handle_rna_entity(i, entity_ids):
         rna_entry["unpairedMsa"] = unpaired_msa
     return rna_entry
 
-def handle_dna_entity(i, entity_ids):
+def collect_dna_sequence_data(i):
     sequence = st.text_area(f"DNA Sequence (Entity {i+1})", key=f"sequence_{i}", help="Enter the DNA sequence.")
+
     # Modifications
     modifications_list = []
     add_modifications = st.checkbox(f"Add Modifications", key=f"add_modifications_{i}")
@@ -406,7 +438,6 @@ def handle_dna_entity(i, entity_ids):
             modifications_list.append({"modificationType": mod_type, "basePosition": mod_position})
 
     dna_entry = {
-        "id": entity_ids if len(entity_ids) > 1 else entity_ids[0],
         "sequence": sequence
     }
     if modifications_list:
@@ -414,29 +445,26 @@ def handle_dna_entity(i, entity_ids):
 
     return dna_entry
 
-def handle_ligand_entity(i, entity_ids):
-    ligand_ids = entity_ids
-    ccd_codes = st.text_input(f"CCD Codes (comma-separated)", key=f"ccd_codes_{i}", help="Provide CCD Codes, separated by commas. Ion would be specify as a ligand with ccdCodes: e.g. MG")
+def collect_ligand_sequence_data(i):
+    ccd_codes = st.text_input(f"CCD Codes (comma-separated)", key=f"ccd_codes_{i}", help="Provide CCD Codes, separated by commas. Ions can be specified as ligands with ccdCodes (e.g., MG).")
     smiles = st.text_input(f"SMILES String", key=f"smiles_{i}", help="Provide SMILES string of the ligand.")
     if ccd_codes and smiles:
         st.error("Please provide only one of CCD Codes or SMILES String.")
-        return None
+        return {}
     elif ccd_codes:
         ccd_codes_list = re.split(r"\s*,\s*", ccd_codes)
         ligand_entry = {
-            "id": ligand_ids if len(ligand_ids) > 1 else ligand_ids[0],
             "ccdCodes": ccd_codes_list
         }
         return ligand_entry
     elif smiles:
         ligand_entry = {
-            "id": ligand_ids if len(ligand_ids) > 1 else ligand_ids[0],
             "smiles": smiles
         }
         return ligand_entry
     else:
         st.error("Ligand requires either CCD Codes or SMILES String.")
-        return None
+        return {}
 
 def handle_bond(b):
     bond_col1, bond_col2 = st.columns(2)
