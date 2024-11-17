@@ -4,7 +4,13 @@ import os
 import sys
 
 def main():
-    app_path = os.path.join(os.path.dirname(__file__), 'app.py')
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    root_dir = os.path.abspath(os.path.join(current_dir, '..'))
+    if root_dir not in sys.path:
+        sys.path.insert(0, root_dir)
+    
+    app_path = os.path.join(root_dir, 'app.py')
+    
     streamlit_command = [
         'streamlit', 'run', app_path,
         '--server.fileWatcherType=none'

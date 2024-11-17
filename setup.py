@@ -2,14 +2,14 @@ from setuptools import setup, find_packages
 
 setup(
     name='afusion',
-    version='0.2.2',
+    version='1.0.0',
     author='Han Wang',
     author_email='marspenman@gmail.com',
     description='A Streamlit app for running AlphaFold 3 predictions',
     long_description=open('README.md', encoding='utf-8').read(),
     long_description_content_type='text/markdown',
     url='https://github.com/Hanziwww/AlphaFold3-GUI',
-    packages=find_packages(),
+    packages=find_packages(include=['afusion', 'afusion.*']),
     include_package_data=True,
     install_requires=[
         'streamlit'
