@@ -170,7 +170,7 @@ If you encounter any issues during installation or usage, please refer to the re
   - **📊 Command Output**: Execution output is displayed within the app for monitoring.
 
 ## Documentation
-- **Batch Predictions with AFusion API**: Documentation for using the AFusion API in Python scripts for batch predictions is under development. Stay tuned for updates.
+- Full Documentation in [here](https://alphafold3-gui.readthedocs.io)
 
 ## ToDo
 
