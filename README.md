@@ -171,7 +171,7 @@ If you encounter any issues during installation or usage, please refer to the re
 
 ## ToDo
 
-- [ ] 📄 **Bulid Documentation:** Tutorial for using the AFusion API in Python scripts for batch predictions.
+- [X] ~~📄 **Bulid Documentation:** Tutorial for using the AFusion API in Python scripts for batch predictions.~~
 - [X] ~~♻️ **Refactor Code and Publish to PyPI**: Refactor the project code for improved modularity and maintainability, and publish the latest version to PyPI for easy installation.~~
 - [ ] 🔗 **Integrate Alphafold-analysis**: Incorporate [Alphafold-analysis](https://github.com/Hanziwww/Alphafold-analysis) into the project for detailed analysis of AlphaFold prediction results.  
 - [ ] ⚛️ **Preset Common Small Molecules & Metal Ions**: Add a dedicated section for quick access to commonly used small molecules and metal ions.  
