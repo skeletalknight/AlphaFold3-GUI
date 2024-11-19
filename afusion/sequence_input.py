@@ -1,8 +1,10 @@
 import streamlit as st
 import re
+from loguru import logger
 
 def collect_protein_sequence_data(i):
     sequence = st.text_area(f"Protein Sequence (Entity {i+1})", key=f"sequence_{i}", help="Enter the protein sequence.")
+    logger.debug(f"Protein sequence input for Entity {i+1}.")
 
     # Modifications
     modifications_list = []
@@ -17,6 +19,7 @@ def collect_protein_sequence_data(i):
             with mod_col2:
                 mod_position = st.number_input(f"Modification Position (ptmPosition)", min_value=1, step=1, key=f"mod_position_{i}_{j}")
             modifications_list.append({"ptmType": mod_type, "ptmPosition": mod_position})
+            logger.debug(f"Added modification: {modifications_list[-1]}")
 
     # MSA Options
     msa_option = st.selectbox(f"MSA Option", ["Auto-generate 🛠️", "Don't use MSA 🚫", "Upload MSA 📄"], key=f"msa_option_{i}")
@@ -26,12 +29,15 @@ def collect_protein_sequence_data(i):
     if msa_option == "Upload MSA 📄":
         unpaired_msa = st.text_area(f"Unpaired MSA", key=f"unpaired_msa_{i}")
         paired_msa = st.text_area(f"Paired MSA", key=f"paired_msa_{i}")
+        logger.debug(f"Entity {i+1} uploaded MSA.")
     elif msa_option == "Don't use MSA 🚫":
         unpaired_msa = ""
         paired_msa = ""
+        logger.debug(f"Entity {i+1} chose not to use MSA.")
     elif msa_option == "Auto-generate 🛠️":
         unpaired_msa = None
         paired_msa = None
+        logger.debug(f"Entity {i+1} chose to auto-generate MSA.")
 
     # Templates
     templates_list = []
@@ -48,6 +54,7 @@ def collect_protein_sequence_data(i):
                 template_indices_list = [int(idx.strip()) for idx in template_indices.split(",") if idx.strip()]
             except ValueError:
                 st.error("Indices lists should be integers separated by commas.")
+                logger.error("Error parsing indices lists.")
                 query_indices_list = []
                 template_indices_list = []
             templates_list.append({
@@ -55,6 +62,7 @@ def collect_protein_sequence_data(i):
                 "queryIndices": query_indices_list,
                 "templateIndices": template_indices_list
             })
+            logger.debug(f"Added template: {templates_list[-1]}")
 
     protein_entry = {
         "sequence": sequence
@@ -82,6 +90,7 @@ def collect_protein_sequence_data(i):
 
 def collect_rna_sequence_data(i):
     sequence = st.text_area(f"RNA Sequence (Entity {i+1})", key=f"sequence_{i}", help="Enter the RNA sequence.")
+    logger.debug(f"RNA sequence input for Entity {i+1}.")
 
     # Modifications
     modifications_list = []
@@ -96,6 +105,7 @@ def collect_rna_sequence_data(i):
             with mod_col2:
                 mod_position = st.number_input(f"Modification Position (basePosition)", min_value=1, step=1, key=f"mod_position_{i}_{j}")
             modifications_list.append({"modificationType": mod_type, "basePosition": mod_position})
+            logger.debug(f"Added modification: {modifications_list[-1]}")
 
     # MSA Options
     msa_option = st.selectbox(f"MSA Option", ["Auto-generate 🛠️", "Don't use MSA 🚫", "Upload MSA 📄"], key=f"msa_option_{i}")
@@ -103,10 +113,13 @@ def collect_rna_sequence_data(i):
     unpaired_msa = ""
     if msa_option == "Upload MSA 📄":
         unpaired_msa = st.text_area(f"Unpaired MSA", key=f"unpaired_msa_{i}")
+        logger.debug(f"Entity {i+1} uploaded MSA.")
     elif msa_option == "Don't use MSA 🚫":
         unpaired_msa = ""
+        logger.debug(f"Entity {i+1} chose not to use MSA.")
     elif msa_option == "Auto-generate 🛠️":
         unpaired_msa = None
+        logger.debug(f"Entity {i+1} chose to auto-generate MSA.")
 
     rna_entry = {
         "sequence": sequence
@@ -119,6 +132,7 @@ def collect_rna_sequence_data(i):
 
 def collect_dna_sequence_data(i):
     sequence = st.text_area(f"DNA Sequence (Entity {i+1})", key=f"sequence_{i}", help="Enter the DNA sequence.")
+    logger.debug(f"DNA sequence input for Entity {i+1}.")
 
     # Modifications
     modifications_list = []
@@ -133,6 +147,7 @@ def collect_dna_sequence_data(i):
             with mod_col2:
                 mod_position = st.number_input(f"Modification Position (basePosition)", min_value=1, step=1, key=f"mod_position_{i}_{j}")
             modifications_list.append({"modificationType": mod_type, "basePosition": mod_position})
+            logger.debug(f"Added modification: {modifications_list[-1]}")
 
     dna_entry = {
         "sequence": sequence
@@ -147,18 +162,22 @@ def collect_ligand_sequence_data(i):
     smiles = st.text_input(f"SMILES String", key=f"smiles_{i}", help="Provide SMILES string of the ligand.")
     if ccd_codes and smiles:
         st.error("Please provide only one of CCD Codes or SMILES String.")
+        logger.error("Ligand provided both CCD Codes and SMILES String.")
         return {}
     elif ccd_codes:
         ccd_codes_list = re.split(r"\s*,\s*", ccd_codes)
         ligand_entry = {
             "ccdCodes": ccd_codes_list
         }
+        logger.debug(f"Ligand CCD Codes: {ccd_codes_list}")
         return ligand_entry
     elif smiles:
         ligand_entry = {
             "smiles": smiles
         }
+        logger.debug(f"Ligand SMILES: {smiles}")
         return ligand_entry
     else:
         st.error("Ligand requires either CCD Codes or SMILES String.")
+        logger.error("Ligand missing CCD Codes or SMILES String.")
         return {}

@@ -5,6 +5,7 @@ README.md
 app.py
 setup.py
 afusion/__init__.py
+afusion/api.py
 afusion/bonds.py
 afusion/cli.py
 afusion/execution.py

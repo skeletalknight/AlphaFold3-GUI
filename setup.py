@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='afusion',
-    version='1.0.0',
+    version='1.1.0',
     author='Han Wang',
     author_email='marspenman@gmail.com',
     description='A Streamlit app for running AlphaFold 3 predictions',
@@ -12,7 +12,9 @@ setup(
     packages=find_packages(include=['afusion', 'afusion.*']),
     include_package_data=True,
     install_requires=[
-        'streamlit'
+        'streamlit',
+        'pandas',
+        'loguru'
     ],
     entry_points={
         'console_scripts': [

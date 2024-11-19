@@ -1,4 +1,5 @@
 import streamlit as st
+from loguru import logger
 
 def handle_bond(b):
     bond_col1, bond_col2 = st.columns(2)
@@ -15,9 +16,12 @@ def handle_bond(b):
 
     if not (entity_id1 and atom_name1 and entity_id2 and atom_name2):
         st.error("All fields are required for defining a bond.")
+        logger.error(f"Fields missing for bond {b+1}.")
         return None
 
-    return [
+    bond = [
         [entity_id1, residue_id1, atom_name1],
         [entity_id2, residue_id2, atom_name2]
     ]
+    logger.debug(f"Bond {b+1} defined as: {bond}")
+    return bond
