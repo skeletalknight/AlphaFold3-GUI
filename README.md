@@ -36,6 +36,7 @@
 - [Usage](#usage)
   - [Launching AFusion](#launching-afusion)
   - [Using the GUI](#using-the-gui)
+- [Documentation](#documentation)
 - [ToDo](#todo)
 - [Screenshots](#screenshots)
 - [License](#license)
@@ -48,6 +49,8 @@
 - **⚙️ Dynamic JSON Generation**: Automatically generates the required JSON input file for AlphaFold 3 based on user inputs.
 - **🚀 Integrated Execution**: Run AlphaFold 3 directly from the GUI with customizable Docker execution settings.
 - **🖥️ Visual Feedback**: Provides command output within the interface for monitoring and debugging.
+- **🖥️ Console Output**: Track processes and debug more effectively with backend console output.
+- **🧩 API for Batch Predictions**: Perform batch predictions using the AFusion API in Python scripts.
 
 ## Prerequisites
 
@@ -69,7 +72,7 @@ Before using AFusion, ensure that you have the following:
    pip install afusion
    ```
 
-2. **Run AFusion**
+2. **Run AFusion GUI**
 
    After installation, you can start AFusion by running:
 
@@ -163,19 +166,24 @@ If you encounter any issues during installation or usage, please refer to the re
   - **🔧 Docker Command**: The exact Docker command used is displayed for your reference.
   - **📊 Command Output**: Execution output is displayed within the app for monitoring.
 
-## ToDo ✅
+## Documentation
+- **Batch Predictions with AFusion API**: Documentation for using the AFusion API in Python scripts for batch predictions is under development. Stay tuned for updates.
 
-- [X] ♻️ ~~**Refactor Code and Publish to PyPI**: Refactor the project code for improved modularity and maintainability, and publish the latest version to PyPI for easy installation.~~
+## ToDo
+
+- [X] ~~♻️ **Refactor Code and Publish to PyPI**: Refactor the project code for improved modularity and maintainability, and publish the latest version to PyPI for easy installation.~~
 - [ ] 🔗 **Integrate Alphafold-analysis**: Incorporate [Alphafold-analysis](https://github.com/Hanziwww/Alphafold-analysis) into the project for detailed analysis of AlphaFold prediction results.  
 - [ ] ⚛️ **Preset Common Small Molecules & Metal Ions**: Add a dedicated section for quick access to commonly used small molecules and metal ions.  
 - [ ] 🧬 **Add Common Covalent Modifications**: Include predefined options for common covalent modifications with user customization capabilities.  
 - [ ] 🛠️ **New Tool for Chemical Small Molecules**: Develop a new tool to handle and model chemical small molecules, supporting seamless integration into the prediction pipeline.  
-- [ ] 🖥️ **Add Console Output**: Implement a backend console for output to track processes and debug more effectively.  
-- [ ] 🧩 **Create API for Batch Predictions**: Develop a standalone function API to allow users to perform batch predictions with afusion in Python scripts.
+- [X] ~~🖥️ **Add Console Output**: Implement a backend console for output to track processes and debug more effectively.~~
+- [X] ~~🧩 **Create API for Batch Predictions**: Develop a standalone function API to allow users to perform batch predictions with afusion in Python scripts.~~
 
 ## Screenshots
-
+- GUI Interface
 ![image](https://github.com/user-attachments/assets/99062b24-76c5-4e27-a610-5c80b6afe193)
+- CLI Output
+![image](https://github.com/user-attachments/assets/66bb3789-c2d5-4be2-894b-a779136e8d83)
 
 ## License
 
