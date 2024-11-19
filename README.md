@@ -198,6 +198,6 @@ This project is licensed under the GPL3 License - see the [LICENSE](LICENSE) fil
 
 ---
 
-If you encounter any issues or have suggestions for improvements, please open an issue or submit a pull request.
+If you encounter any issues or have suggestions for improvements, please open an [issue](https://github.com/Hanziwww/AlphaFold3-GUI/issues) or submit a [pull request](https://github.com/Hanziwww/AlphaFold3-GUI/pulls).
 
 Happy Folding! 🧬
