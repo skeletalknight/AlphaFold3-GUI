@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='afusion',
-    version='1.1.0',
+    version='1.1.1',
     author='Han Wang',
     author_email='marspenman@gmail.com',
     description='A Streamlit app for running AlphaFold 3 predictions',

@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: afusion
-Version: 1.1.0
+Version: 1.1.1
 Summary: A Streamlit app for running AlphaFold 3 predictions
 Home-page: https://github.com/Hanziwww/AlphaFold3-GUI
 Author: Han Wang
@@ -28,7 +28,7 @@ Requires-Dist: loguru
 <p>
 </p>
 
-<h1 align="center">🔬 AFusion: AlphaFold 3 GUI</h1>
+<h1 align="center">🔬 AFusion: AlphaFold 3 GUI & Toolkit</h1>
 
 <p align="center">
     <img src="https://img.shields.io/badge/Python-3.10-blue.svg">
@@ -40,7 +40,7 @@ Requires-Dist: loguru
 </p>
 
 <p align="center">
-    <em>AFusion</em> is a user-friendly graphical interface designed to simplify the process of generating input JSON files and running AlphaFold 3 predictions. It streamlines the setup and execution of AlphaFold 3, making it accessible to users who prefer a GUI over command-line interactions.
+    <em>AFusion</em> is a user-friendly graphical interface designed to simplify the process of AlphaFold 3 predictions, making it accessible to users who prefer a GUI over command-line interactions. Now with console output and an API for batch predictions!
 </p>
 
 **[Demo site](https://af3gui.streamlit.app/) (generate input JSON files ONLY)**
@@ -188,6 +188,7 @@ If you encounter any issues during installation or usage, please refer to the re
 
 ## ToDo
 
+- [ ] 📄 **Bulid Documentation:** Tutorial for using the AFusion API in Python scripts for batch predictions.
 - [X] ~~♻️ **Refactor Code and Publish to PyPI**: Refactor the project code for improved modularity and maintainability, and publish the latest version to PyPI for easy installation.~~
 - [ ] 🔗 **Integrate Alphafold-analysis**: Incorporate [Alphafold-analysis](https://github.com/Hanziwww/Alphafold-analysis) into the project for detailed analysis of AlphaFold prediction results.  
 - [ ] ⚛️ **Preset Common Small Molecules & Metal Ions**: Add a dedicated section for quick access to commonly used small molecules and metal ions.  
