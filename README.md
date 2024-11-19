@@ -23,7 +23,7 @@
 </p>
 
 <p align="center">
-    <em>AFusion</em> is a user-friendly graphical interface designed to simplify the process of AlphaFold 3 predictions, making it accessible to users who prefer a GUI over command-line interactions. Now with console output and an API for batch predictions!
+    <em>AFusion</em> is a user-friendly graphical interface designed to simplify the process of AlphaFold 3 predictions, making it accessible to users who prefer a GUI over command-line interactions. Now with console output and an API for **batch predictions**!
 </p>
 
 **[Demo site](https://af3gui.streamlit.app/) (generate input JSON files ONLY)**
