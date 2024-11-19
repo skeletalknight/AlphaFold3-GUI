@@ -1,4 +1,4 @@
-# AFusion Release Notes
+# Release Notes
 
 ## v1.1.1 "Debug and Docs" (Release Date: November 20, 2024)
 
