@@ -11,7 +11,7 @@
 <p>
 </p>
 
-<h1 align="center">🔬 AFusion: AlphaFold 3 GUI</h1>
+<h1 align="center">🔬 AFusion: AlphaFold 3 GUI & Toolkit</h1>
 
 <p align="center">
     <img src="https://img.shields.io/badge/Python-3.10-blue.svg">
