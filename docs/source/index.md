@@ -28,6 +28,7 @@
 installation
 tutorial
 api
+release
 ```
 ---
 
