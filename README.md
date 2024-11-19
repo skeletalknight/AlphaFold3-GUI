@@ -20,6 +20,9 @@
     <a href="https://pypi.org/project/afusion/">
         <img src="https://img.shields.io/badge/PyPI-afusion-purple.svg">
     </a>
+    <a href='https://alphafold3-gui.readthedocs.io/en/latest/?badge=latest'>
+        <img src='https://readthedocs.org/projects/alphafold3-gui/badge/?version=latest' alt='Documentation Status'>
+    </a>
 </p>
 
 <p align="center">
