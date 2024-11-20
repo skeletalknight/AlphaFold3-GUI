@@ -109,7 +109,7 @@ If you encounter any issues during installation or usage, please refer to the re
    From the project directory, run:
 
    ```bash
-   afusion
+   afusion run
    ```
 
 2. **🌐 Access the Application**
