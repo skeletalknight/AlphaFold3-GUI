@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: afusion
-Version: 1.1.1
+Version: 1.1.2
 Summary: A Streamlit app for running AlphaFold 3 predictions
 Home-page: https://github.com/Hanziwww/AlphaFold3-GUI
 Author: Han Wang
@@ -64,6 +64,7 @@ Requires-Dist: loguru
 
 ## Features
 
+- **🧭 Guided Installation**: GUI-based installer to simplify the installation process, easily set up the application step-by-step.
 - **✨ Intuitive Interface**: Easily configure job settings, sequences, and execution parameters through a clean and modern GUI.
 - **📋 Entity Management**: Add multiple entities (Protein, RNA, DNA, Ligand) with support for modifications, MSA options, and templates.
 - **⚙️ Dynamic JSON Generation**: Automatically generates the required JSON input file for AlphaFold 3 based on user inputs.
@@ -78,7 +79,11 @@ Before using AFusion, ensure that you have the following:
 
 1. **🐳 Docker Installed**: Docker is required to run AlphaFold 3. Install Docker from the [official website](https://www.docker.com/get-started/).
 
-2. **🧬 AlphaFold 3 Installed**: AFusion requires AlphaFold 3 to be installed and set up on your system. Follow the installation instructions provided in the [AlphaFold 3 GitHub Repository](https://github.com/google-deepmind/alphafold3) to deploy AlphaFold 3.
+2. **🧬 AlphaFold 3 Installed**: AFusion requires AlphaFold 3 to be installed and set up on your system. Follow the installation instructions provided in the [AlphaFold 3 GitHub Repository](https://github.com/google-deepmind/alphafold3) to deploy AlphaFold 3. Or you can run step-by-step GUI by:
+
+   ```bash
+   afusion install
+   ``` 
 
 3. **🐍 Python 3.10 or Higher**: AFusion is built with Python and requires Python 3.10 or higher.
 
@@ -97,7 +102,7 @@ Before using AFusion, ensure that you have the following:
    After installation, you can start AFusion by running:
 
    ```bash
-   afusion
+   afusion run
    ```
 
    This will launch the AFusion graphical user interface (GUI) in your default web browser.
@@ -199,6 +204,7 @@ If you encounter any issues during installation or usage, please refer to the re
 - [ ] 🛠️ **New Tool for Chemical Small Molecules**: Develop a new tool to handle and model chemical small molecules, supporting seamless integration into the prediction pipeline.  
 - [X] ~~🖥️ **Add Console Output**: Implement a backend console for output to track processes and debug more effectively.~~
 - [X] ~~🧩 **Create API for Batch Predictions**: Develop a standalone function API to allow users to perform batch predictions with afusion in Python scripts.~~
+- [X] ~~**🧭 Create Guided Installation GUI**: To simplify the installation process.~~
 
 ## Screenshots
 - GUI Interface

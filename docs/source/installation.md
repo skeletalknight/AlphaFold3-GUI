@@ -60,7 +60,7 @@ pip install afusion
 After installation, you can start AFusion by running:
 
 ```bash
-afusion
+afusion run
 ```
 
 - This command will launch the AFusion graphical user interface (GUI) in your default web browser.
