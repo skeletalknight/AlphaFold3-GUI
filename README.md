@@ -47,6 +47,7 @@
 
 ## Features
 
+- **🧭 Guided Installation**: GUI-based installer to simplify the installation process, easily set up the application step-by-step.
 - **✨ Intuitive Interface**: Easily configure job settings, sequences, and execution parameters through a clean and modern GUI.
 - **📋 Entity Management**: Add multiple entities (Protein, RNA, DNA, Ligand) with support for modifications, MSA options, and templates.
 - **⚙️ Dynamic JSON Generation**: Automatically generates the required JSON input file for AlphaFold 3 based on user inputs.
@@ -182,6 +183,7 @@ If you encounter any issues during installation or usage, please refer to the re
 - [ ] 🛠️ **New Tool for Chemical Small Molecules**: Develop a new tool to handle and model chemical small molecules, supporting seamless integration into the prediction pipeline.  
 - [X] ~~🖥️ **Add Console Output**: Implement a backend console for output to track processes and debug more effectively.~~
 - [X] ~~🧩 **Create API for Batch Predictions**: Develop a standalone function API to allow users to perform batch predictions with afusion in Python scripts.~~
+- [X] ~~**🧭 Create Guided Installation GUI**: To simplify the installation process.~~
 
 ## Screenshots
 - GUI Interface

@@ -73,6 +73,7 @@ def main():
     #### Sidebar Navigation ####
     with st.sidebar:
         st.header("Navigation")
+        st.sidebar.markdown("---")
         sections = {
             "Job Settings": "job_settings",
             "Sequences": "sequences",
@@ -332,8 +333,6 @@ def main():
         st.info("Click the 'Run AlphaFold 3 Now ▶️' button to execute the command.")
 
     st.markdown("---")
-    # Add footer
-    st.markdown("<p style='text-align: center; font-size: 12px; color: #95a5a6;'>© 2024 Hanzi. All rights reserved.</p>", unsafe_allow_html=True)
 
     # Provide access to the log file
     st.markdown("### Download Log File 📥")
@@ -349,6 +348,11 @@ def main():
     # Display log content in the app
     with st.expander("Show Log Content 📄", expanded=False):
         st.text_area("Log Content", value=log_content, height=200)
+
+    st.markdown("---")
+    # Add footer
+    st.markdown("<p style='text-align: center; font-size: 12px; color: #95a5a6;'>© 2024 Hanzi. All rights reserved.</p>", unsafe_allow_html=True)
+
 
 if __name__ == "__main__":
     main()

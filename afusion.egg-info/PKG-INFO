@@ -37,6 +37,9 @@ Requires-Dist: loguru
     <a href="https://pypi.org/project/afusion/">
         <img src="https://img.shields.io/badge/PyPI-afusion-purple.svg">
     </a>
+    <a href='https://alphafold3-gui.readthedocs.io/en/latest/?badge=latest'>
+        <img src='https://readthedocs.org/projects/alphafold3-gui/badge/?version=latest' alt='Documentation Status'>
+    </a>
 </p>
 
 <p align="center">
@@ -184,7 +187,7 @@ If you encounter any issues during installation or usage, please refer to the re
   - **📊 Command Output**: Execution output is displayed within the app for monitoring.
 
 ## Documentation
-- **Batch Predictions with AFusion API**: Documentation for using the AFusion API in Python scripts for batch predictions is under development. Stay tuned for updates.
+- Full Documentation in [here](https://alphafold3-gui.readthedocs.io)
 
 ## ToDo
 

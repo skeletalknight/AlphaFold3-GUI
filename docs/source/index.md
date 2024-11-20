@@ -7,9 +7,10 @@
 
 ## Features
 
+- **🧭 Guided Installation**: GUI-based installer to simplify the installation process, easily set up the application through step-by-step guidance.
 - **✨ Intuitive Interface**: Easily configure job settings, sequences, and execution parameters through a clean and modern GUI.
 - **📋 Entity Management**: Add multiple entities (Protein, RNA, DNA, Ligand) with support for modifications, MSA options, and templates.
-- **⚙️ Dynamic JSON Generation**: Automatically generates the required JSON input file for AlphaFold 3 based on user inputs.
+- **⚙️  Dynamic JSON Generation**: Automatically generates the required JSON input file for AlphaFold 3 based on user inputs.
 - **🚀 Integrated Execution**: Run AlphaFold 3 directly from the GUI with customizable Docker execution settings.
 - **🖥️ Visual Feedback**: Provides command output within the interface for monitoring and debugging.
 - **🖥️ Console Output**: Track processes and debug more effectively with backend console output.

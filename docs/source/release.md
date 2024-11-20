@@ -1,5 +1,16 @@
 # Release Notes
 
+## v1.1.2 "Guided Installation" (Release Date: November 21, 2024)
+
+### New Features
+
+- **Guided Installation**: Introduced a new GUI-based installer to simplify the installation process. Users can now easily set up the application through step-by-step guidance.
+
+- **CLI Launch**: Added command-line interface support, allowing users to start the application or installation process directly from the command line using the `afusion` command.
+
+---
+
+Let me know if there's anything else I can help you with!
 ## v1.1.1 "Debug and Docs" (Release Date: November 20, 2024)
 
 ### New Features

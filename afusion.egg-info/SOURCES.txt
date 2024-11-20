@@ -11,6 +11,7 @@ afusion/api.py
 afusion/bonds.py
 afusion/cli.py
 afusion/execution.py
+afusion/install.py
 afusion/sequence_input.py
 afusion/utils.py
 afusion.egg-info/PKG-INFO
@@ -30,4 +31,5 @@ docs/source/conf.py
 docs/source/index.md
 docs/source/index.rst
 docs/source/installation.md
+docs/source/release.md
 docs/source/tutorial.md
