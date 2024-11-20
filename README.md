@@ -26,7 +26,7 @@
 </p>
 
 <p align="center">
-    <em>AFusion</em> is a user-friendly graphical interface designed to simplify the process of AlphaFold 3 predictions, making it accessible to users who prefer a GUI over command-line interactions. Now with console output and an API for batch predictions!
+    <em>AFusion</em> is a user-friendly graphical interface designed to simplify the process of AlphaFold 3 installation and predictions, making it accessible to users who prefer a GUI over command-line interactions. Now with console output and an API for batch predictions!
 </p>
 
 **[Demo site](https://af3gui.streamlit.app/) (generate input JSON files ONLY)**
@@ -62,7 +62,7 @@ Before using AFusion, ensure that you have the following:
 
 1. **🐳 Docker Installed**: Docker is required to run AlphaFold 3. Install Docker from the [official website](https://www.docker.com/get-started/).
 
-2. **🧬 AlphaFold 3 Installed**: AFusion requires AlphaFold 3 to be installed and set up on your system. Follow the installation instructions provided in the [AlphaFold 3 GitHub Repository](https://github.com/google-deepmind/alphafold3) to deploy AlphaFold 3. Or you can run step-by-step GUI by:
+2. **🧬 AlphaFold 3 Installed**: AFusion requires AlphaFold 3 to be installed and set up on your system. Follow the installation instructions provided in the [AlphaFold 3 GitHub Repository](https://github.com/google-deepmind/alphafold3) to deploy AlphaFold 3. **Or you can run step-by-step GUI by**:
 
    ```bash
    afusion install
@@ -189,11 +189,28 @@ If you encounter any issues during installation or usage, please refer to the re
 - [X] ~~🧩 **Create API for Batch Predictions**: Develop a standalone function API to allow users to perform batch predictions with afusion in Python scripts.~~
 - [X] ~~**🧭 Create Guided Installation GUI**: To simplify the installation process.~~
 
-## Screenshots
-- GUI Interface
-![image](https://github.com/user-attachments/assets/99062b24-76c5-4e27-a610-5c80b6afe193)
-- CLI Output
-![image](https://github.com/user-attachments/assets/66bb3789-c2d5-4be2-894b-a779136e8d83)
+# Screenshots
+
+### Prediction GUI Interface
+<details>
+  <summary>Click to view screenshot</summary>
+  
+  ![image](https://github.com/user-attachments/assets/fbeef0c7-b913-4b4a-bd92-4bfe86f12383)
+</details>
+
+### Installation GUI Interface
+<details>
+  <summary>Click to view screenshot</summary>
+  
+  ![image](https://github.com/user-attachments/assets/f083aad7-c3b0-4d1d-b670-7de91804c9b0)
+</details>
+
+### CLI Output
+<details>
+  <summary>Click to view screenshot</summary>
+  
+  ![image](https://github.com/user-attachments/assets/66bb3789-c2d5-4be2-894b-a779136e8d83)
+</details>
 
 ## License
 
