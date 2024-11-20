@@ -2,7 +2,7 @@
 
 This section provides detailed instructions on how to install and set up AFusion and its prerequisites.
 
-## Prerequisites
+## Option 1: Install Using the Terminal
 
 Before installing AFusion, ensure that you have the following components installed on your system:
 
@@ -27,6 +27,19 @@ Before installing AFusion, ensure that you have the following components install
 - **Installation**:
   - Download Python from the [official website](https://www.python.org/downloads/).
   - Alternatively, use a package manager like `apt`, `brew`, or `conda`.
+
+## Option 2: Use the Guided GUI Installation
+
+Alternatively, you can use the guided GUI installation process provided by AFusion, which simplifies the installation steps through an interactive interface.
+
+- **Start the Installation GUI**:
+  - Run the following command in your terminal:
+    ```bash
+    afusion install
+    ```
+  - This command will launch the AFusion installation GUI, guiding you step-by-step through the process of installing Docker, AlphaFold 3, and Python if they are not already installed.
+
+By choosing Option 2, you can streamline the installation process with a user-friendly graphical interface that handles the setup for you.
 
 ## Installation and Running
 

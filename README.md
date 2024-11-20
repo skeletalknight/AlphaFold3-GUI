@@ -62,7 +62,11 @@ Before using AFusion, ensure that you have the following:
 
 1. **🐳 Docker Installed**: Docker is required to run AlphaFold 3. Install Docker from the [official website](https://www.docker.com/get-started/).
 
-2. **🧬 AlphaFold 3 Installed**: AFusion requires AlphaFold 3 to be installed and set up on your system. Follow the installation instructions provided in the [AlphaFold 3 GitHub Repository](https://github.com/google-deepmind/alphafold3) to deploy AlphaFold 3.
+2. **🧬 AlphaFold 3 Installed**: AFusion requires AlphaFold 3 to be installed and set up on your system. Follow the installation instructions provided in the [AlphaFold 3 GitHub Repository](https://github.com/google-deepmind/alphafold3) to deploy AlphaFold 3. Or you can run step-by-step GUI by:
+
+   ```bash
+   afusion install
+   ``` 
 
 3. **🐍 Python 3.10 or Higher**: AFusion is built with Python and requires Python 3.10 or higher.
 
@@ -81,7 +85,7 @@ Before using AFusion, ensure that you have the following:
    After installation, you can start AFusion by running:
 
    ```bash
-   afusion
+   afusion run
    ```
 
    This will launch the AFusion graphical user interface (GUI) in your default web browser.
