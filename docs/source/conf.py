@@ -7,7 +7,7 @@ sys.path.insert(0, os.path.abspath('../../'))
 project = 'AFusion'
 copyright = '2024, Hanzi'
 author = 'Hanzi'
-release = '1.1.2'
+release = '1.2.0'
 
 # -- General configuration ---------------------------------------------------
 extensions = [

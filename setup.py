@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='afusion',
-    version='1.1.2b',
+    version='1.2.0',
     author='Han Wang',
     author_email='marspenman@gmail.com',
     description='A Streamlit app for running AlphaFold 3 predictions',
@@ -14,7 +14,11 @@ setup(
     install_requires=[
         'streamlit',
         'pandas',
-        'loguru'
+        'loguru',
+        'numpy',
+        'py3Dmol',
+        'biopython',
+        'plotly',
     ],
     entry_points={
         'console_scripts': [

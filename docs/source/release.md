@@ -1,5 +1,17 @@
 # Release Notes
 
+## v1.2.0 "Visualization & Analysis" (Release Date: December 21, 2024)
+
+### New Features
+
+- **Visualization Module**: Introduced a powerful visualization module for AlphaFold 3 results. Users can upload output files (e.g., `.pdb`, `.json`) to analyze predictions with detailed structure displays, customizable plots, and PDF report generation.
+
+- **Integrated Visualization**: The visualization tools are now seamlessly integrated into the prediction GUI, allowing users to switch to the visualization tab immediately after predictions are complete.
+
+- **Enhanced Output Analysis**: Added an automated AlphaFold 3 output analysis system that provides streamlined insights with customizable visualizations and detailed reports.
+
+- **Batch Prediction API Improvements**: Updated the batch prediction API to support visualization integration and enhanced error handling.
+
 ## v1.1.2 "Guided Installation" (Release Date: November 21, 2024)
 
 ### New Features

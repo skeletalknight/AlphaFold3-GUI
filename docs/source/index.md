@@ -7,6 +7,9 @@
 
 ## Features
 
+### **🌟 New Feature!**
+- **AlphaFold 3 Output Analysis System**: Automatically analyze and visualize results with customizable visualizations and generate detailed PDF reports for streamlined insights.
+
 - **🧭 Guided Installation**: GUI-based installer to simplify the installation process, easily set up the application through step-by-step guidance.
 - **✨ Intuitive Interface**: Easily configure job settings, sequences, and execution parameters through a clean and modern GUI.
 - **📋 Entity Management**: Add multiple entities (Protein, RNA, DNA, Ligand) with support for modifications, MSA options, and templates.

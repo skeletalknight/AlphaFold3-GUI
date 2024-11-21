@@ -8,12 +8,14 @@ requirements.txt
 setup.py
 afusion/__init__.py
 afusion/api.py
+afusion/app.py
 afusion/bonds.py
 afusion/cli.py
 afusion/execution.py
 afusion/install.py
 afusion/sequence_input.py
 afusion/utils.py
+afusion/visualization.py
 afusion.egg-info/PKG-INFO
 afusion.egg-info/SOURCES.txt
 afusion.egg-info/dependency_links.txt

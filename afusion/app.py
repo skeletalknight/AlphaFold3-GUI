@@ -6,6 +6,12 @@ import re
 import os
 import sys
 from loguru import logger
+import pandas as pd
+import numpy as np
+import plotly.express as px
+import io
+import py3Dmol
+from Bio import PDB
 
 # Import your modules (make sure they are correctly installed in your environment)
 from afusion.execution import run_alphafold
@@ -18,8 +24,70 @@ from afusion.sequence_input import (
 from afusion.bonds import handle_bond
 from afusion.utils import compress_output_folder
 
+# Import visualization functions
+from afusion.visualization import (
+    read_cif_file,
+    extract_residue_bfactors,
+    extract_pae_from_json,
+    extract_summary_confidences,
+    display_visualization_header,
+    visualize_pae,
+    display_summary_data
+)
+
 # Configure the logger
 logger.add("afusion.log", rotation="1 MB", level="DEBUG")
+
+# Redefine the visualize_structure function to change the background color to black
+def visualize_structure(residue_bfactors, ligands, cif_content):
+    # Make the viewer responsive by setting width to '100%'
+    view = py3Dmol.view(width='100%', height=600)
+    view.addModel(cif_content, 'cif')
+
+    # Set default style for protein as cartoon with grey color
+    view.setStyle({'model': -1}, {'cartoon': {'color': 'grey'}})
+
+    # Color each residue based on average B-factor
+    for (chain_id, resseq), info in residue_bfactors.items():
+        avg_bfactor = info['avg_bfactor']
+        color = get_color_from_bfactor(avg_bfactor)
+        selection = {'chain': chain_id, 'resi': resseq}
+        style = {'cartoon': {'color': color}}
+        view.addStyle(selection, style)
+
+    # Color ligand atoms based on B-factor
+    for ligand in ligands:
+        bfactor = ligand['bfactor']
+        color = get_color_from_bfactor(bfactor)
+        selection = {
+            'chain': ligand['chain_id'],
+            'resi': ligand['resseq'],
+            'atom': ligand['atom_name']
+        }
+        style = {'stick': {'color': color}}
+        view.addStyle(selection, style)
+
+    # Set background color to black
+    view.setBackgroundColor('#000000')
+
+    # Generate HTML content
+    view_html = view._make_html()
+    return view_html
+
+# Also redefine get_color_from_bfactor function if it's not imported
+def get_color_from_bfactor(bfactor):
+    # Define color mapping
+    color_mapping = [
+        {'range': [90, 100], 'color': '#106dff'},   # Very high (pLDDT > 90)
+        {'range': [70, 90],  'color': '#10cff1'},   # Confident (90 > pLDDT > 70)
+        {'range': [50, 70],  'color': '#f6ed12'},   # Low (70 > pLDDT > 50)
+        {'range': [0, 50],   'color': '#ef821e'}    # Very low (pLDDT < 50)
+    ]
+    for mapping in color_mapping:
+        b_min, b_max = mapping['range']
+        if b_min <= bfactor < b_max:
+            return mapping['color']
+    return 'grey'  # Default color
 
 def main():
     # Set page configuration and theme
@@ -318,13 +386,60 @@ def main():
             )
             logger.info("User downloaded the results ZIP file.")
 
-            # Provide instructions to run the Visualization App
+            # Visualize the results directly on the same page
             st.markdown("### Visualize Your Results")
-            st.write("To visualize your results, run the following command:")
-            st.code(f"afusion visualization --output_folder_path '{output_folder_path}'", language="bash")
-            st.write("Or launch the Visualization App and enter the output folder path.")
-            logger.info("Provided instructions to the user to run the Visualization App.")
+            st.write("The prediction results are visualized below.")
 
+            # Get the paths to the necessary files
+            def find_file_by_suffix(directory_path, suffix):
+                for root, dirs, files in os.walk(directory_path):
+                    for file_name in files:
+                        if file_name.endswith(suffix):
+                            return os.path.join(root, file_name)
+                return None
+
+            required_files = {
+                "model.cif": find_file_by_suffix(output_folder_path, 'model.cif'),
+                "confidences.json": find_file_by_suffix(output_folder_path, 'confidences.json'),
+                "summary_confidences.json": find_file_by_suffix(output_folder_path, 'summary_confidences.json')
+            }
+
+            missing_files = [fname for fname, fpath in required_files.items() if fpath is None]
+            if missing_files:
+                st.error(f"Missing files: {', '.join(missing_files)} in the output directory or its subdirectories.")
+                logger.error(f"Missing files: {', '.join(missing_files)}")
+            else:
+                st.success("All required files are found.")
+                logger.info(f"Required files found: {required_files}")
+
+                # Load the data
+                structure, cif_content = read_cif_file(required_files["model.cif"])
+                residue_bfactors, ligands = extract_residue_bfactors(structure)
+                pae_matrix = extract_pae_from_json(required_files["confidences.json"])
+                summary_data = extract_summary_confidences(required_files["summary_confidences.json"])
+                logger.debug("Successfully loaded data from output folder.")
+
+                # Display the visualizations
+                display_visualization_header()
+
+                # Create two columns with width ratio 3:2
+                col1, col2 = st.columns([3, 2])
+
+                with col1:
+                    st.write("### 3D Model Visualization")
+                    if residue_bfactors or ligands:
+                        view_html = visualize_structure(residue_bfactors, ligands, cif_content)
+                        st.components.v1.html(view_html, height=600, scrolling=False)
+                    else:
+                        st.error("Failed to extract atom data.")
+                        logger.error("Failed to extract atom data.")
+
+                with col2:
+                    # Visualize the PAE matrix
+                    visualize_pae(pae_matrix)
+
+                # Display summary data
+                display_summary_data(summary_data)
         else:
             st.error("AlphaFold 3 execution did not complete successfully. Please check the logs.")
             logger.error("AlphaFold 3 execution did not complete successfully.")

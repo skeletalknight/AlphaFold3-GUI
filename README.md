@@ -26,7 +26,7 @@
 </p>
 
 <p align="center">
-    <em>AFusion</em> is a user-friendly graphical interface designed to simplify the process of AlphaFold 3 installation and predictions, making it accessible to users who prefer a GUI over command-line interactions. Now with console output and an API for batch predictions!
+    <em>AFusion</em> is a user-friendly graphical interface designed to simplify the process of AlphaFold 3 installation and predictions, making it accessible to users who prefer a GUI over command-line interactions.
 </p>
 
 **[Demo site](https://af3gui.streamlit.app/) (generate input JSON files ONLY)**
@@ -55,7 +55,7 @@
 - **🖥️ Console Output**: Track processes and debug more effectively with backend console output.
 - **🧩 API for Batch Predictions**: Perform batch predictions using the AFusion API in Python scripts.
 
-### **🌟 Coming Soon!**
+### **🌟 New Feature!**
 - **AlphaFold 3 Output Analysis System**: Automatically analyze and visualize results with customizable visualizations and generate detailed PDF reports for streamlined insights.
 
 ## Prerequisites
@@ -176,6 +176,26 @@ If you encounter any issues during installation or usage, please refer to the re
   - **🔧 Docker Command**: The exact Docker command used is displayed for your reference.
   - **📊 Command Output**: Execution output is displayed within the app for monitoring.
 
+### Visualization Module 🎨📊
+
+1. **🚀 Launch Visualization Interface**
+
+   To start the visualization module, run:
+
+   ```bash
+   afusion visualization
+   ```
+
+2. **📂 Upload and Analyze Results**
+
+   - **📤 Upload Files**: Upload AlphaFold 3 output files (e.g., `.cif`, `.json`) directly in the visualization interface.
+   - **🔬 Visual Analysis**: Perform visual analysis for each prediction, with detailed structure displays and customizable plots.
+   - **📄 Web Reports**: Generate web reports like Alphafold3 Server for the analysis on demand.
+
+3. **🔗 Integrated with Prediction GUI**
+
+   - **🎛️ Seamless Integration**: The visualization tools are also integrated into the prediction GUI. Once predictions are complete, you can switch seamlessly to the visualization tab for analysis.
+
 ## Documentation
 - Full Documentation in [here](https://alphafold3-gui.readthedocs.io)
 
@@ -228,3 +248,4 @@ This project is licensed under the GPL3 License - see the [LICENSE](LICENSE) fil
 If you encounter any issues or have suggestions for improvements, please open an [issue](https://github.com/Hanziwww/AlphaFold3-GUI/issues) or submit a [pull request](https://github.com/Hanziwww/AlphaFold3-GUI/pulls).
 
 Happy Folding! 🧬
+

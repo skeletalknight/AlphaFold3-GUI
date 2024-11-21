@@ -14,16 +14,28 @@ def main():
         help='Sub-commands'
     )
 
-    # Add the 'install' sub-command
+    # 'install' sub-command
     install_parser = subparsers.add_parser(
         'install', 
         help='Launch the installation GUI'
     )
 
-    # Add the 'run' sub-command
+    # 'run' sub-command
     run_parser = subparsers.add_parser(
         'run', 
         help='Run the main application (Alphafold3 GUI)'
+    )
+
+    # 'visualization' sub-command
+    visualization_parser = subparsers.add_parser(
+        'visualization',
+        help='Launch the Visualization App'
+    )
+    visualization_parser.add_argument(
+        '--output_folder_path',
+        type=str,
+        default='',
+        help='Path to the AlphaFold 3 output directory for visualization'
     )
 
     # Parse the command-line arguments
@@ -50,12 +62,33 @@ def main():
         if root_dir not in sys.path:
             sys.path.insert(0, root_dir)
 
-        app_path = os.path.join('app.py')
+        app_path = os.path.join(root_dir, 'afusion/app.py')
 
         streamlit_command = [
             'streamlit', 'run', app_path,
             '--server.fileWatcherType=none'
         ] + sys.argv[2:]  # Skip the first two arguments ('afusion', 'run')
+        os.execvp('streamlit', streamlit_command)
+
+    elif args.command == 'visualization':
+        # Run the Visualization App
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        root_dir = os.path.abspath(os.path.join(current_dir, '..'))
+        if root_dir not in sys.path:
+            sys.path.insert(0, root_dir)
+
+        app_path = os.path.join(root_dir, 'afusion/visualization.py')
+
+        streamlit_command = [
+            'streamlit', 'run', app_path,
+            '--server.port', '8502',
+            '--server.fileWatcherType=none'
+        ]
+
+        # Pass the output_folder_path as command-line argument
+        if args.output_folder_path:
+            streamlit_command += ['--', f'--output_folder_path={args.output_folder_path}']
+
         os.execvp('streamlit', streamlit_command)
 
     else:
@@ -64,4 +97,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
