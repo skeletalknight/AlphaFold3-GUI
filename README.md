@@ -46,7 +46,6 @@
 - [Acknowledgements](#acknowledgements)
 
 ## Features
-
 - **🧭 Guided Installation**: GUI-based installer to simplify the installation process, easily set up the application step-by-step.
 - **✨ Intuitive Interface**: Easily configure job settings, sequences, and execution parameters through a clean and modern GUI.
 - **📋 Entity Management**: Add multiple entities (Protein, RNA, DNA, Ligand) with support for modifications, MSA options, and templates.
@@ -55,6 +54,9 @@
 - **🖥️ Visual Feedback**: Provides command output within the interface for monitoring and debugging.
 - **🖥️ Console Output**: Track processes and debug more effectively with backend console output.
 - **🧩 API for Batch Predictions**: Perform batch predictions using the AFusion API in Python scripts.
+
+### **🌟 Coming Soon!**
+- **AlphaFold 3 Output Analysis System**: Automatically analyze and visualize results with customizable visualizations and generate detailed PDF reports for streamlined insights.
 
 ## Prerequisites
 
