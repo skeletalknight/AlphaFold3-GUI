@@ -5,3 +5,4 @@ numpy
 py3Dmol
 biopython
 plotly
+myst-parser

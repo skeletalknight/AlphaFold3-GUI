@@ -10,10 +10,12 @@ import plotly.express as px
 import pandas as pd
 from loguru import logger
 
-
 # Configure logger
 logger.add("afusion_visualization.log", rotation="1 MB", level="DEBUG")
 
+# ========================================
+# Functions that accept file paths
+# ========================================
 
 def read_cif_file(file_path):
     parser = PDB.MMCIFParser(QUIET=True)
@@ -23,6 +25,40 @@ def read_cif_file(file_path):
     structure = parser.get_structure('protein', file_like)
     return structure, content
 
+def extract_pae_from_json(file_path):
+    with open(file_path, 'r') as file:
+        data = json.load(file)
+    pae = np.array(data.get("pae", []))
+    return pae
+
+def extract_summary_confidences(file_path):
+    with open(file_path, 'r') as file:
+        data = json.load(file)
+    return data
+
+# ========================================
+# Functions that accept file objects (uploaded files)
+# ========================================
+
+def read_cif_file_obj(file_obj):
+    parser = PDB.MMCIFParser(QUIET=True)
+    content = file_obj.read().decode('utf-8')
+    file_like = io.StringIO(content)
+    structure = parser.get_structure('protein', file_like)
+    return structure, content
+
+def extract_pae_from_json_obj(file_obj):
+    data = json.load(file_obj)
+    pae = np.array(data.get("pae", []))
+    return pae
+
+def extract_summary_confidences_obj(file_obj):
+    data = json.load(file_obj)
+    return data
+
+# ========================================
+# Common functions
+# ========================================
 
 def extract_residue_bfactors(structure):
     residue_bfactors = {}
@@ -75,15 +111,15 @@ def get_color_from_bfactor(bfactor):
             return mapping['color']
     return 'grey'  # Default color
 
-def visualize_structure(residue_bfactors, ligands, cif_content):
-    # Create py3Dmol view
+def visualize_structure(residue_bfactors, ligands, cif_content, background_color='#000000'):
+    # Create a py3Dmol view
     view = py3Dmol.view(width='100%', height=600)
     view.addModel(cif_content, 'cif')
 
     # Set default style
     view.setStyle({'model': -1}, {'cartoon': {'color': 'grey'}})
 
-    # Color by B-factor
+    # Apply coloring based on B-factors
     for (chain_id, resseq), info in residue_bfactors.items():
         avg_bfactor = info['avg_bfactor']
         color = get_color_from_bfactor(avg_bfactor)
@@ -103,26 +139,12 @@ def visualize_structure(residue_bfactors, ligands, cif_content):
         style = {'stick': {'color': color}}
         view.addStyle(selection, style)
 
-    # Set background color to black
-    view.setBackgroundColor('#000000')
+    # Set background color
+    view.setBackgroundColor(background_color)
 
     # Generate HTML content
     view_html = view._make_html()
     return view_html
-
-
-def extract_pae_from_json(file_path):
-    with open(file_path, 'r') as file:
-        data = json.load(file)
-    pae = np.array(data.get("pae", []))
-    return pae
-
-
-def extract_summary_confidences(file_path):
-    with open(file_path, 'r') as file:
-        data = json.load(file)
-    return data
-
 
 def display_visualization_header():
     st.write("### Visualization")
@@ -154,9 +176,9 @@ def visualize_pae(pae_matrix):
         pae_matrix,
         color_continuous_scale='Greens_r',
         labels=dict(
-            x="Scored Residue",
-            y="Aligned Residue",
-            color="Expected Position Error (Å)"
+            x="Residue index",
+            y="Residue index",
+            color="PAE (Å)"
         ),
     )
     fig.update_layout(
@@ -186,6 +208,10 @@ def display_summary_data(summary_data):
             df.at[index, 'Value'] = json.dumps(row['Value'], indent=2)
 
     st.table(df)
+
+# ========================================
+# Main application
+# ========================================
 
 def main():
     # Set page configuration and theme
@@ -260,10 +286,10 @@ def main():
     if model_cif_file and confidences_json_file and summary_confidences_file:
         try:
             # Read and process files
-            structure, cif_content = read_cif_file(model_cif_file)
+            structure, cif_content = read_cif_file_obj(model_cif_file)
             residue_bfactors, ligands = extract_residue_bfactors(structure)
-            pae_matrix = extract_pae_from_json(confidences_json_file)
-            summary_data = extract_summary_confidences(summary_confidences_file)
+            pae_matrix = extract_pae_from_json_obj(confidences_json_file)
+            summary_data = extract_summary_confidences_obj(summary_confidences_file)
             logger.info("Successfully loaded and processed uploaded files.")
 
             # Display visualization results
@@ -277,7 +303,7 @@ def main():
             with col1:
                 st.write("### 3D Model Visualization")
                 if residue_bfactors or ligands:
-                    view_html = visualize_structure(residue_bfactors, ligands, cif_content)
+                    view_html = visualize_structure(residue_bfactors, ligands, cif_content, background_color='#000000')
                     st.components.v1.html(view_html, height=600, scrolling=False)
                 else:
                     st.error("Failed to extract atom data.")
@@ -298,7 +324,7 @@ def main():
         st.info("Please upload all required files to proceed.")
 
     st.markdown("---")
-    # Provide option to download the log file
+    # Provide log file download option
     st.markdown("### Download Log File 📥")
     with open('afusion_visualization.log', 'r') as log_file:
         log_content = log_file.read()
