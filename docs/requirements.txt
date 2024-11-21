@@ -6,3 +6,4 @@ py3Dmol
 biopython
 plotly
 myst-parser
+furo
