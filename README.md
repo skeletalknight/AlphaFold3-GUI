@@ -31,6 +31,8 @@
 
 **[Demo site](https://af3gui.streamlit.app/) (generate input JSON files ONLY)**
 
+[**Usable visualization site**](https://af3vis.streamlit.app/) **(fully usable)**
+
 ## Table of Contents
 
 - [Features](#features)
