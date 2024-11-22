@@ -205,7 +205,8 @@ If you encounter any issues during installation or usage, please refer to the re
 
 - [X] ~~📄 **Bulid Documentation:** Tutorial for using the AFusion API in Python scripts for batch predictions.~~
 - [X] ~~♻️ **Refactor Code and Publish to PyPI**: Refactor the project code for improved modularity and maintainability, and publish the latest version to PyPI for easy installation.~~
-- [ ] 🔗 **Develop AlphaFold result analysis system**: Design and implement a comprehensive analysis pipeline for AlphaFold prediction results.
+- [ ] ~~🔗 **Develop AlphaFold result analysis system**: Design and implement a comprehensive analysis pipeline for AlphaFold prediction results.~~
+    - [ ] Update the system.
 - [ ] ⚛️ **Preset Common Small Molecules & Metal Ions**: Add a dedicated section for quick access to commonly used small molecules and metal ions.  
 - [ ] 🛠️ **New Tool for Chemical Small Molecules**: Develop a new tool to handle and model chemical small molecules, supporting seamless integration into the prediction pipeline.  
 - [X] ~~🖥️ **Add Console Output**: Implement a backend console for output to track processes and debug more effectively.~~
