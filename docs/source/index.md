@@ -7,6 +7,8 @@
 
 [**Demo Site**](https://af3gui.streamlit.app/) *(generates input JSON files ONLY)*
 
+[**Usable visualization site**](https://af3vis.streamlit.app/) *(fully usable)*
+
 ## Features
 
 - **🧭 Guided Installation**: GUI-based installer to simplify the installation process, easily set up the application through step-by-step guidance.
