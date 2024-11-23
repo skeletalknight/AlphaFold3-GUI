@@ -25,6 +25,8 @@
     </a>
 </p>
 
+![image](https://github.com/user-attachments/assets/c3731d1b-632c-4883-a30e-436d7e0a8f02)
+
 <p align="center">
     <em>AFusion</em> is a user-friendly graphical interface designed to simplify the process of AlphaFold 3 installation,  prediction and visualization, making it accessible to users who prefer a GUI over command-line interactions.
 </p>
@@ -221,7 +223,7 @@ If you encounter any issues during installation or usage, please refer to the re
   
   ![image](https://github.com/user-attachments/assets/fbeef0c7-b913-4b4a-bd92-4bfe86f12383)
   #### Visualization Module
-  ![image](https://github.com/user-attachments/assets/ae9e8b0c-8219-431f-8c1d-73f229c53039)
+  ![image](https://github.com/user-attachments/assets/67124555-1351-41fe-bb08-21d34ee9f7ec)
 </details>
 
 ### Visualization GUI Interface
@@ -229,7 +231,7 @@ If you encounter any issues during installation or usage, please refer to the re
 <details>
   <summary>Click to view screenshot</summary>
   
-  ![image](https://github.com/user-attachments/assets/d91c476e-f11a-4002-a842-9ae014fce88d)
+  ![image](https://github.com/user-attachments/assets/0df3e988-50a2-480a-bfee-095b79a329c7)
 </details>
 
 ### Installation GUI Interface
