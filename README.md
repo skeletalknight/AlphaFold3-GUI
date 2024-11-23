@@ -31,9 +31,9 @@
     <em>AFusion</em> is a user-friendly graphical interface designed to simplify the process of AlphaFold 3 installation,  prediction and visualization, making it accessible to users who prefer a GUI over command-line interactions.
 </p>
 
-**[Demo site](https://af3gui.streamlit.app/) (generate input JSON files ONLY)**
+**[Demo site](https://af3gui.streamlit.app/)** *(generate input JSON files ONLY)*
 
-[**Usable visualization site**](https://af3vis.streamlit.app/) **(fully usable)**
+[**Usable visualization site**](https://af3vis.streamlit.app/) *(fully usable)*
 
 ## Table of Contents
 
