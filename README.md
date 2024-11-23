@@ -25,7 +25,7 @@
     </a>
 </p>
 
-![image](https://github.com/user-attachments/assets/c3731d1b-632c-4883-a30e-436d7e0a8f02)
+![image](https://github.com/user-attachments/assets/d1d894c7-c0cc-4218-9677-1917c1ad7b88)
 
 <p align="center">
     <em>AFusion</em> is a user-friendly graphical interface designed to simplify the process of AlphaFold 3 installation,  prediction and visualization, making it accessible to users who prefer a GUI over command-line interactions.
