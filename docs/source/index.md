@@ -1,5 +1,7 @@
 # 🔬 AFusion: AlphaFold 3 GUI & Toolkit
 
+![image](https://github.com/user-attachments/assets/d1d894c7-c0cc-4218-9677-1917c1ad7b88)
+
 ## Introduction
 **AFusion** is a user-friendly graphical interface designed to simplify AlphaFold 3 usage, making advanced protein structure modeling accessible to everyone. Whether you prefer a GUI over command-line interactions or need an API for batch predictions, AFusion has you covered.
 
