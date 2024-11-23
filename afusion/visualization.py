@@ -28,8 +28,9 @@ def read_cif_file(file_path):
 def extract_pae_from_json(file_path):
     with open(file_path, 'r') as file:
         data = json.load(file)
-    pae = np.array(data.get("pae", []))
-    return pae
+    pae = np.array(data.get("pae", []), dtype=np.float16)  # Use np.float16
+    token_chain_ids = data.get("token_chain_ids", [])
+    return pae, token_chain_ids
 
 def extract_summary_confidences(file_path):
     with open(file_path, 'r') as file:
@@ -49,8 +50,9 @@ def read_cif_file_obj(file_obj):
 
 def extract_pae_from_json_obj(file_obj):
     data = json.load(file_obj)
-    pae = np.array(data.get("pae", []))
-    return pae
+    pae = np.array(data.get("pae", []), dtype=np.float16)  # Use np.float16
+    token_chain_ids = data.get("token_chain_ids", [])
+    return pae, token_chain_ids
 
 def extract_summary_confidences_obj(file_obj):
     data = json.load(file_obj)
@@ -134,7 +136,7 @@ def visualize_structure(residue_bfactors, ligands, cif_content, background_color
         selection = {
             'chain': ligand['chain_id'],
             'resi': ligand['resseq'],
-            'atom': ligand['atom_name']
+            'atom': ligand['atom_name']  # Corrected line
         }
         style = {'stick': {'color': color}}
         view.addStyle(selection, style)
@@ -170,7 +172,7 @@ def display_visualization_header():
     """
     st.markdown(color_mapping_html, unsafe_allow_html=True)
 
-def visualize_pae(pae_matrix):
+def visualize_pae(pae_matrix, token_chain_ids):
     st.write("### Predicted Aligned Error (PAE)")
     fig = px.imshow(
         pae_matrix,
@@ -180,37 +182,81 @@ def visualize_pae(pae_matrix):
             y="Residue index",
             color="PAE (Å)"
         ),
+        zmin=0.0,
+        zmax=31.75
     )
-    fig.update_layout(
-        margin=dict(l=20, r=20, t=30, b=80),
-        coloraxis_colorbar=dict(
-            orientation='h',
-            yanchor='bottom',
-            y=-0.5,
-            xanchor='center',
-            x=0.5,
-            title_side='bottom'
-        ),
-        xaxis=dict(
-            tickfont=dict(size=12),
-        )
-    )
+    # Draw chain boundaries
+    if token_chain_ids:
+        chain_boundaries = []
+        prev_chain = token_chain_ids[0]
+        for idx, chain_id in enumerate(token_chain_ids):
+            if chain_id != prev_chain:
+                chain_boundaries.append(idx - 0.5)
+                prev_chain = chain_id
+        for boundary in chain_boundaries:
+            fig.add_shape(
+                type="line",
+                x0=boundary,
+                y0=0,
+                x1=boundary,
+                y1=len(token_chain_ids),
+                line=dict(color="red", width=1)
+            )
+            fig.add_shape(
+                type="line",
+                x0=0,
+                y0=boundary,
+                x1=len(token_chain_ids),
+                y1=boundary,
+                line=dict(color="red", width=1)
+            )
     st.plotly_chart(fig, use_container_width=True)
 
-def display_summary_data(summary_data):
+def display_summary_data(summary_data, chain_ids):
     st.write("### Summary of Confidence Metrics")
-    # Convert summary data to DataFrame for better display
-    df = pd.DataFrame(list(summary_data.items()), columns=['Metric', 'Value'])
 
-    # Format arrays for better readability
-    for index, row in df.iterrows():
-        if isinstance(row['Value'], list):
-            df.at[index, 'Value'] = json.dumps(row['Value'], indent=2)
+    # Map chain-level metrics to chain IDs
+    chain_metrics = {}
+    for key in ['chain_iptm', 'chain_ptm']:
+        if key in summary_data:
+            values = summary_data[key]
+            if len(values) == len(chain_ids):
+                chain_metrics[key] = dict(zip(chain_ids, values))
+            else:
+                st.warning(f"The number of values in {key} does not match the number of chains.")
 
-    st.table(df)
+    # Display chain-level metrics
+    for key, metrics in chain_metrics.items():
+        st.write(f"#### {key}")
+        df = pd.DataFrame.from_dict(metrics, orient='index', columns=[key])
+        st.table(df.style.set_table_styles(
+            [{'selector': 'th, td', 'props': [('border', '1px solid black')]}]
+        ))
+
+    # Display pair metrics as matrices
+    for key in ['chain_pair_iptm', 'chain_pair_pae_min']:
+        pair_metrics = summary_data.get(key, {})
+        if pair_metrics:
+            st.write(f"#### {key}")
+            if len(pair_metrics) == len(chain_ids):
+                df = pd.DataFrame(pair_metrics, index=chain_ids, columns=chain_ids)
+                st.table(df.style.set_table_styles(
+                    [{'selector': 'th, td', 'props': [('border', '1px solid black')]}]
+                ))
+            else:
+                st.warning(f"The dimensions of {key} do not match the number of chains.")
+
+    # Display other metrics
+    other_metrics = {k: v for k, v in summary_data.items() if k not in ['chain_iptm', 'chain_ptm', 'chain_pair_iptm', 'chain_pair_pae_min']}
+    if other_metrics:
+        st.write("#### Other Metrics")
+        df = pd.DataFrame(list(other_metrics.items()), columns=['Metric', 'Value'])
+        st.table(df.style.set_table_styles(
+            [{'selector': 'th, td', 'props': [('border', '1px solid black')]}]
+        ))
 
 # ========================================
-# Main application
+# Main Application
 # ========================================
 
 def main():
@@ -288,9 +334,13 @@ def main():
             # Read and process files
             structure, cif_content = read_cif_file_obj(model_cif_file)
             residue_bfactors, ligands = extract_residue_bfactors(structure)
-            pae_matrix = extract_pae_from_json_obj(confidences_json_file)
+            pae_matrix, token_chain_ids = extract_pae_from_json_obj(confidences_json_file)
             summary_data = extract_summary_confidences_obj(summary_confidences_file)
             logger.info("Successfully loaded and processed uploaded files.")
+
+            # Get chain ID list
+            chain_ids = list(set(token_chain_ids))
+            chain_ids.sort()  # Sort for consistency
 
             # Display visualization results
             st.markdown('<div id="visualization"></div>', unsafe_allow_html=True)
@@ -311,11 +361,11 @@ def main():
 
             with col2:
                 # Visualize PAE matrix
-                visualize_pae(pae_matrix)
+                visualize_pae(pae_matrix, token_chain_ids)
 
             # Display summary data
             st.markdown('<div id="summary_metrics"></div>', unsafe_allow_html=True)
-            display_summary_data(summary_data)
+            display_summary_data(summary_data, chain_ids)
 
         except Exception as e:
             st.error(f"An error occurred while processing the files: {e}")

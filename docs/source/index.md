@@ -1,14 +1,11 @@
 # 🔬 AFusion: AlphaFold 3 GUI & Toolkit
 
 ## Introduction
-**AFusion** is a user-friendly graphical interface designed to simplify AlphaFold 3 predictions, making advanced protein structure modeling accessible to everyone. Whether you prefer a GUI over command-line interactions or need an API for batch predictions, AFusion has you covered.
+**AFusion** is a user-friendly graphical interface designed to simplify AlphaFold 3 usage, making advanced protein structure modeling accessible to everyone. Whether you prefer a GUI over command-line interactions or need an API for batch predictions, AFusion has you covered.
 
 [**Demo Site**](https://af3gui.streamlit.app/) *(generates input JSON files ONLY)*
 
 ## Features
-
-### **🌟 New Feature!**
-- **AlphaFold 3 Output Analysis System**: Automatically analyze and visualize results with customizable visualizations and generate detailed PDF reports for streamlined insights.
 
 - **🧭 Guided Installation**: GUI-based installer to simplify the installation process, easily set up the application through step-by-step guidance.
 - **✨ Intuitive Interface**: Easily configure job settings, sequences, and execution parameters through a clean and modern GUI.
@@ -18,6 +15,9 @@
 - **🖥️ Visual Feedback**: Provides command output within the interface for monitoring and debugging.
 - **🖥️ Console Output**: Track processes and debug more effectively with backend console output.
 - **🧩 API for Batch Predictions**: Perform batch predictions using the AFusion API in Python scripts.
+
+### **🌟 New Feature!**
+- **AlphaFold 3 Output Analysis System**: Automatically analyze and visualize results with customizable visualizations and generate detailed PDF reports for streamlined insights.
 
 ## Acknowledgements
 

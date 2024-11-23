@@ -1,6 +1,15 @@
 # Release Notes
 
-## v1.2.0 "Visualization & Analysis" (Release Date: December 21, 2024)
+## v1.2.1 "Visualization Optimized" (Release Date: November 23, 2024)
+
+### Improvements
+
+- **Visualization Performance Optimization**: Enhanced the visualization module to improve rendering speed and reduce memory usage, enabling smoother analysis of large AlphaFold 3 output files.
+
+- **Stability Improvements**: Addressed minor bugs and improved the stability of the visualization tools, ensuring a seamless user experience during structure analysis.
+
+
+## v1.2.0 "Visualization & Analysis" (Release Date: November 21, 2024)
 
 ### New Features
 

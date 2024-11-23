@@ -2,10 +2,10 @@ from setuptools import setup, find_packages
 
 setup(
     name='afusion',
-    version='1.2.0',
+    version='1.2.2',
     author='Han Wang',
     author_email='marspenman@gmail.com',
-    description='A Streamlit app for running AlphaFold 3 predictions',
+    description='AFusion: AlphaFold 3 GUI & Toolkit with Visualization',
     long_description=open('README.md', encoding='utf-8').read(),
     long_description_content_type='text/markdown',
     url='https://github.com/Hanziwww/AlphaFold3-GUI',

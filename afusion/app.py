@@ -22,7 +22,7 @@ from afusion.sequence_input import (
     collect_ligand_sequence_data
 )
 from afusion.bonds import handle_bond
-from afusion.utils import compress_output_folder
+from afusion.utils import log_to_ga, compress_output_folder
 
 # Import visualization functions
 from afusion.visualization import (
@@ -90,6 +90,10 @@ def get_color_from_bfactor(bfactor):
     return 'grey'  # Default color
 
 def main():
+
+    # Log to Google Analytics when the app starts
+    log_to_ga()
+
     # Set page configuration and theme
     st.set_page_config(
         page_title="AFusion: AlphaFold 3 GUI",
@@ -415,8 +419,11 @@ def main():
                 # Load the data
                 structure, cif_content = read_cif_file(required_files["model.cif"])
                 residue_bfactors, ligands = extract_residue_bfactors(structure)
-                pae_matrix = extract_pae_from_json(required_files["confidences.json"])
+                pae_matrix, token_chain_ids = extract_pae_from_json(required_files["confidences.json"])
                 summary_data = extract_summary_confidences(required_files["summary_confidences.json"])
+                chain_ids = list(set(token_chain_ids))
+                chain_ids.sort()  # Sort for consistency
+
                 logger.debug("Successfully loaded data from output folder.")
 
                 # Display the visualizations
@@ -436,10 +443,10 @@ def main():
 
                 with col2:
                     # Visualize the PAE matrix
-                    visualize_pae(pae_matrix)
+                    visualize_pae(pae_matrix, token_chain_ids)
 
                 # Display summary data
-                display_summary_data(summary_data)
+                display_summary_data(summary_data, chain_ids)
         else:
             st.error("AlphaFold 3 execution did not complete successfully. Please check the logs.")
             logger.error("AlphaFold 3 execution did not complete successfully.")
