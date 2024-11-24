@@ -222,8 +222,9 @@ If you encounter any issues during installation or usage, please refer to the re
   <summary>Click to view screenshot</summary>
   
   ![image](https://github.com/user-attachments/assets/fbeef0c7-b913-4b4a-bd92-4bfe86f12383)
+  ---
   #### Visualization Module
-  ![image](https://github.com/user-attachments/assets/67124555-1351-41fe-bb08-21d34ee9f7ec)
+  ![5d669cae7b5ff498e456719cfc1fa7ef](https://github.com/user-attachments/assets/c15f7c3a-a8fc-4120-9b9c-dd4fd5bf3697)
 </details>
 
 ### Visualization GUI Interface
@@ -231,7 +232,8 @@ If you encounter any issues during installation or usage, please refer to the re
 <details>
   <summary>Click to view screenshot</summary>
   
-  ![image](https://github.com/user-attachments/assets/0df3e988-50a2-480a-bfee-095b79a329c7)
+  ![ba57fe831626ca0184510abd2069a4aa](https://github.com/user-attachments/assets/269cc9be-9145-481f-a819-e5af2bf59788)
+
 </details>
 
 ### Installation GUI Interface
