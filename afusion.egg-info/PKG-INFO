@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: afusion
-Version: 1.2.2
+Version: 1.2.2.1
 Summary: AFusion: AlphaFold 3 GUI & Toolkit with Visualization
 Home-page: https://github.com/Hanziwww/AlphaFold3-GUI
 Author: Han Wang
@@ -45,6 +45,8 @@ Requires-Dist: plotly
         <img src='https://readthedocs.org/projects/alphafold3-gui/badge/?version=latest' alt='Documentation Status'>
     </a>
 </p>
+
+![image](https://github.com/user-attachments/assets/d1d894c7-c0cc-4218-9677-1917c1ad7b88)
 
 <p align="center">
     <em>AFusion</em> is a user-friendly graphical interface designed to simplify the process of AlphaFold 3 installation,  prediction and visualization, making it accessible to users who prefer a GUI over command-line interactions.
@@ -242,7 +244,7 @@ If you encounter any issues during installation or usage, please refer to the re
   
   ![image](https://github.com/user-attachments/assets/fbeef0c7-b913-4b4a-bd92-4bfe86f12383)
   #### Visualization Module
-  ![image](https://github.com/user-attachments/assets/ae9e8b0c-8219-431f-8c1d-73f229c53039)
+  ![image](https://github.com/user-attachments/assets/67124555-1351-41fe-bb08-21d34ee9f7ec)
 </details>
 
 ### Visualization GUI Interface
@@ -250,7 +252,7 @@ If you encounter any issues during installation or usage, please refer to the re
 <details>
   <summary>Click to view screenshot</summary>
   
-  ![image](https://github.com/user-attachments/assets/d91c476e-f11a-4002-a842-9ae014fce88d)
+  ![image](https://github.com/user-attachments/assets/0df3e988-50a2-480a-bfee-095b79a329c7)
 </details>
 
 ### Installation GUI Interface

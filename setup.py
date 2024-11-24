@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='afusion',
-    version='1.2.2',
+    version='1.2.2.1',
     author='Han Wang',
     author_email='marspenman@gmail.com',
     description='AFusion: AlphaFold 3 GUI & Toolkit with Visualization',

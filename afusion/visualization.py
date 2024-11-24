@@ -136,7 +136,7 @@ def visualize_structure(residue_bfactors, ligands, cif_content, background_color
         selection = {
             'chain': ligand['chain_id'],
             'resi': ligand['resseq'],
-            'atom': ligand['atom_name']  # Corrected line
+            'atom': ligand['atom_name']
         }
         style = {'stick': {'color': color}}
         view.addStyle(selection, style)
@@ -229,20 +229,44 @@ def display_summary_data(summary_data, chain_ids):
     for key, metrics in chain_metrics.items():
         st.write(f"#### {key}")
         df = pd.DataFrame.from_dict(metrics, orient='index', columns=[key])
-        st.table(df.style.set_table_styles(
+        # Format numbers to two decimal places
+        df_style = df.style.format("{:.2f}").set_table_styles(
             [{'selector': 'th, td', 'props': [('border', '1px solid black')]}]
-        ))
+        ).set_properties(**{'text-align': 'center'})
+        # Center the table and set a fixed width
+        st.markdown("<div style='display: flex; justify-content: center;'>", unsafe_allow_html=True)
+        st.table(df_style)
+        st.markdown("</div>", unsafe_allow_html=True)
 
-    # Display pair metrics as matrices
+    # Display pair metrics as matrices and visualize them
     for key in ['chain_pair_iptm', 'chain_pair_pae_min']:
         pair_metrics = summary_data.get(key, {})
         if pair_metrics:
             st.write(f"#### {key}")
             if len(pair_metrics) == len(chain_ids):
                 df = pd.DataFrame(pair_metrics, index=chain_ids, columns=chain_ids)
-                st.table(df.style.set_table_styles(
+                # Format numbers to two decimal places
+                df_style = df.style.format("{:.2f}").set_table_styles(
                     [{'selector': 'th, td', 'props': [('border', '1px solid black')]}]
-                ))
+                ).set_properties(**{'text-align': 'center'})
+                # Create two columns
+                col1, col2 = st.columns([1, 1])
+                with col1:
+                    st.markdown("<div style='display: flex; justify-content: center;'>", unsafe_allow_html=True)
+                    st.table(df_style)
+                    st.markdown("</div>", unsafe_allow_html=True)
+                with col2:
+                    # Visualize the matrix
+                    fig = px.imshow(
+                        df,
+                        x=chain_ids,
+                        y=chain_ids,
+                        color_continuous_scale='Viridis',
+                        text_auto=".2f",
+                        labels={'x': 'Chain', 'y': 'Chain', 'color': key}
+                    )
+                    fig.update_layout(autosize=True)
+                    st.plotly_chart(fig, use_container_width=True)
             else:
                 st.warning(f"The dimensions of {key} do not match the number of chains.")
 
@@ -251,9 +275,15 @@ def display_summary_data(summary_data, chain_ids):
     if other_metrics:
         st.write("#### Other Metrics")
         df = pd.DataFrame(list(other_metrics.items()), columns=['Metric', 'Value'])
-        st.table(df.style.set_table_styles(
+        # Format 'Value' column to two decimal places if numeric
+        df['Value'] = df['Value'].apply(lambda x: f"{x:.2f}" if isinstance(x, (int, float)) else x)
+        df_style = df.style.set_table_styles(
             [{'selector': 'th, td', 'props': [('border', '1px solid black')]}]
-        ))
+        ).set_properties(**{'text-align': 'center'})
+        # Center the table and set a fixed width
+        st.markdown("<div style='display: flex; justify-content: center;'>", unsafe_allow_html=True)
+        st.table(df_style)
+        st.markdown("</div>", unsafe_allow_html=True)
 
 # ========================================
 # Main Application
