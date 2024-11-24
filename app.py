@@ -1,4 +1,4 @@
-# app.py
+# simplified app.py for streamlit cloud
 
 import streamlit as st
 import json
