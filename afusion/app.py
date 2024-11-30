@@ -401,10 +401,17 @@ def main():
                         if file_name.endswith(suffix):
                             return os.path.join(root, file_name)
                 return None
+            
+            def find_file_by_suffix_exclude_summary(directory_path, suffix, exclude_name):
+                for root, dirs, files in os.walk(directory_path):
+                    for file_name in files:
+                        if file_name.endswith(suffix) and exclude_name not in file_name:
+                            return os.path.join(root, file_name)
+                return None
 
             required_files = {
                 "model.cif": find_file_by_suffix(output_folder_path, 'model.cif'),
-                "confidences.json": find_file_by_suffix(output_folder_path, 'confidences.json'),
+                "confidences.json": find_file_by_suffix_exclude_summary(output_folder_path, 'confidences.json', 'summary_confidences.json'),
                 "summary_confidences.json": find_file_by_suffix(output_folder_path, 'summary_confidences.json')
             }
 
@@ -421,6 +428,7 @@ def main():
                 residue_bfactors, ligands = extract_residue_bfactors(structure)
                 pae_matrix, token_chain_ids = extract_pae_from_json(required_files["confidences.json"])
                 summary_data = extract_summary_confidences(required_files["summary_confidences.json"])
+                
                 chain_ids = list(set(token_chain_ids))
                 chain_ids.sort()  # Sort for consistency
 
