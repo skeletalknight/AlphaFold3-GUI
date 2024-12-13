@@ -11,7 +11,7 @@
 <p>
 </p>
 
-<h1 align="center">🔬 AFusion: AlphaFold 3 GUI & Toolkit</h1>
+<h1 align="center"> AFusion: AlphaFold3 GUI(Graphical User Interface)</h1>
 
 <p align="center">
     <img src="https://img.shields.io/badge/Python-3.10-blue.svg">
@@ -28,7 +28,7 @@
 ![image](https://github.com/user-attachments/assets/d1d894c7-c0cc-4218-9677-1917c1ad7b88)
 
 <p align="center">
-    <em>AFusion</em> is a user-friendly graphical interface designed to simplify the process of AlphaFold 3 installation,  prediction and visualization, making it accessible to users who prefer a GUI over command-line interactions.
+    Transform your protein structure prediction workflow with AFusion - a sleek, intuitive graphical interface that makes AlphaFold3 accessible to everyone. No more command-line hassles - just point, click, and predict..
 </p>
 
 **[Demo site](https://af3gui.streamlit.app/)** *(generate input JSON files ONLY)*
@@ -49,15 +49,21 @@
 - [License](#license)
 - [Acknowledgements](#acknowledgements)
 
-## Features
-- **🧭 Guided Installation**: GUI-based installer to simplify the installation process, easily set up the application step-by-step.
-- **✨ Intuitive Interface**: Easily configure job settings, sequences, and execution parameters through a clean and modern GUI.
-- **📋 Entity Management**: Add multiple entities (Protein, RNA, DNA, Ligand) with support for modifications, MSA options, and templates.
-- **⚙️ Dynamic JSON Generation**: Automatically generates the required JSON input file for AlphaFold 3 based on user inputs.
-- **🚀 Integrated Execution**: Run AlphaFold 3 directly from the GUI with customizable Docker execution settings.
-- **🖥️ Visual Feedback**: Provides command output within the interface for monitoring and debugging.
-- **🖥️ Console Output**: Track processes and debug more effectively with backend console output.
-- **🧩 API for Batch Predictions**: Perform batch predictions using the AFusion API in Python scripts.
+## ✨ Key Features
+
+### Installation & Setup
+- **GUI Installer**: Step-by-step visual installation wizard
+- **Auto-Configuration**: Handles environment setup and dependencies
+
+### Core Functionality
+- **Visual Workflow**: Clean, modern interface for job configuration 
+- **Multi-Entity Support**: Process proteins, RNA, DNA, and ligands
+- **Advanced Options**: Customize MSA, templates, and modifications
+
+### Execution & Control
+- **🚀 Integrated Pipeline**: Direct AlphaFold3 execution from GUI
+- **🖥️ Live Monitoring**: Real-time process tracking and console output
+- **🧩 Batch Processing**: Python API for automated predictions
 
 ### **🌟 New Feature!**
 - **AlphaFold 3 Output Analysis System**: Automatically analyze and visualize results with customizable visualizations and generate detailed PDF reports for streamlined insights.
