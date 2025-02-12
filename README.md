@@ -287,7 +287,7 @@ Before using AFusion, ensure that you have the following:
 <details>
   <summary>Click to view screenshot</summary>
   
-  ![image](https://github.com/user-attachments/assets/Capture1)
+  ![image](./Capture1.png)
 </details>
 
 ### Visualization GUI Interface
@@ -295,7 +295,7 @@ Before using AFusion, ensure that you have the following:
 <details>
   <summary>Click to view screenshot</summary>
   
-  ![ba57fe831626ca0184510abd2069a4aa](https://github.com/user-attachments/assets/Capture2)
+  ![image](./Capture2.png)
 
 </details>
 
@@ -303,7 +303,7 @@ Before using AFusion, ensure that you have the following:
 <details>
   <summary>Click to view screenshot</summary>
   
-  ![image](https://github.com/user-attachments/assets/Capture3)
+  ![image](./Capture3.png)
 </details>
 
 
