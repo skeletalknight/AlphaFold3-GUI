@@ -287,23 +287,21 @@ Before using AFusion, ensure that you have the following:
 <details>
   <summary>Click to view screenshot</summary>
   
-  ![image](./Capture1.png)
+  ![image](Capture1.PNG)
 </details>
 
 ### Visualization GUI Interface
-
 <details>
   <summary>Click to view screenshot</summary>
   
-  ![image](./Capture2.png)
-
+  ![image](Capture2.PNG)
 </details>
 
 ### Enhanced Visualization
 <details>
   <summary>Click to view screenshot</summary>
   
-  ![image](./Capture3.png)
+  ![image](Capture3.PNG)
 </details>
 
 
