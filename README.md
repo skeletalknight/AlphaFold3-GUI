@@ -284,25 +284,13 @@ Before using AFusion, ensure that you have the following:
 ## Screenshots
 
 ### Prediction GUI Interface
-<details>
-  <summary>Click to view screenshot</summary>
-  
-  ![image](Capture1.PNG)
-</details>
+![image](Capture1.PNG)
 
 ### Visualization GUI Interface
-<details>
-  <summary>Click to view screenshot</summary>
-  
-  ![image](Capture2.PNG)
-</details>
+![image](Capture2.PNG)
 
 ### Enhanced Visualization
-<details>
-  <summary>Click to view screenshot</summary>
-  
-  ![image](Capture3.PNG)
-</details>
+![image](Capture3.PNG)
 
 
 
