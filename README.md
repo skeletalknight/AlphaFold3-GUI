@@ -215,9 +215,8 @@ Before using AFusion, ensure that you have the following:
 <details>
   <summary>Click to view screenshot</summary>
   
-  ![image](Capture1.PNG)
-  ![image](Capture2.PNG)
-  ![image](Capture3.PNG)
+  <img width="1165" alt="image" src="https://github.com/user-attachments/assets/1480db8e-5a11-43ad-8c46-b54dbe333f66" />
+
 </details>
 
 ### Installation GUI Interface
