@@ -13,8 +13,6 @@
 
 <h1 align="center"> AFusion: AlphaFold3 GUI(Graphical User Interface)</h1>
 
-> This repository is a fork of [Hanziwww/AlphaFold3-GUI](https://github.com/Hanziwww/AlphaFold3-GUI) with additional visualization features. The core functionality and original work was created by Hanziwww.
-
 <p align="center">
     <img src="https://img.shields.io/badge/Python-3.10-blue.svg">
     <img src="https://img.shields.io/badge/Framework-Streamlit-green.svg">
@@ -283,14 +281,6 @@ Before using AFusion, ensure that you have the following:
 
 ## Screenshots
 
-### Prediction GUI Interface
-![image](Capture1.PNG)
-
-### Visualization GUI Interface
-![image](Capture2.PNG)
-
-### Enhanced Visualization
-![image](Capture3.PNG)
 
 
 
