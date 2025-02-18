@@ -191,77 +191,6 @@ Before using AFusion, ensure that you have the following:
   - **🔧 Docker Command**: The exact Docker command used is displayed for your reference.
   - **📊 Command Output**: Execution output is displayed within the app for monitoring.
 
-### Enhanced Visualization Module 🎨📊 (New in this fork)
-
-1. **Launch Visualization Interface**
-   ```bash
-   afusion visualization
-   ```
-
-2. **Advanced Visualization Features**
-   - **View Styles**: 
-     - Cartoon representation
-     - Stick model
-     - Line representation
-     - Sphere model
-   - **Coloring Options**: 
-     - Confidence-based coloring
-     - Chain-based coloring
-     - Secondary structure coloring
-     - Rainbow coloring
-     - Custom color selection
-   - **Interactive Tools**:
-     - Chain selection
-     - Residue range selection
-     - Sequence viewer with residue highlighting
-     - Custom color highlighting
-     - Real-time structure manipulation
-
-3. **Enhanced Export Capabilities**
-   - **Scientific Formats**:
-     - CIF format export
-     - PDB format export
-     - Multiple resolution options
-   - **3D Printing/CAD**:
-     - STL export with custom resolution
-     - Optimized mesh generation
-     - Multiple style options for 3D printing
-
-4. **Improved Analysis Features**
-   - **Enhanced PAE Visualization**:
-     - Interactive matrix display
-     - Chain boundary visualization
-     - Custom color schemes
-     - Zoom and pan capabilities
-   - **Confidence Metrics**:
-     - Comprehensive metric display
-     - Interactive data tables
-     - Visual representations
-     - Chain-specific analysis
-
-### Visualization Quick Start
-
-1. **Upload Files**:
-   ```bash
-   # Launch visualization module
-   afusion visualization
-
-   # Upload your files:
-   # - model.cif
-   # - confidences.json
-   # - summary_confidences.json
-   ```
-
-2. **Basic Controls**:
-   - Use mouse to rotate structure
-   - Scroll to zoom
-   - Right-click to pan
-   - Use sidebar controls for style and color options
-
-3. **Export Options**:
-   - Select export format from the sidebar
-   - Choose resolution and style
-   - Download in desired format
 
 ## Documentation
 - Full Documentation in [here](https://alphafold3-gui.readthedocs.io)
@@ -281,7 +210,29 @@ Before using AFusion, ensure that you have the following:
 
 ## Screenshots
 
+### Visualization GUI Interface
 
+<details>
+  <summary>Click to view screenshot</summary>
+  
+  ![image](Capture1.PNG)
+  ![image](Capture2.PNG)
+  ![image](Capture3.PNG)
+</details>
+
+### Installation GUI Interface
+<details>
+  <summary>Click to view screenshot</summary>
+  
+  ![image](https://github.com/user-attachments/assets/f083aad7-c3b0-4d1d-b670-7de91804c9b0)
+</details>
+
+### CLI Output
+<details>
+  <summary>Click to view screenshot</summary>
+  
+  ![image](https://github.com/user-attachments/assets/66bb3789-c2d5-4be2-894b-a779136e8d83)
+</details>
 
 
 ## License
